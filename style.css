@@ -53,7 +53,6 @@ header {
   box-shadow: var(--sombra-leve);
 }
 
-
 header .container {
   display: flex;
   justify-content: space-between;
@@ -87,31 +86,46 @@ nav a:hover {
 }
 
 /* =======================================
-   SEÇÃO INICIAL
+   HERO LINEAR COM IMAGEM
 ======================================= */
 .inicio {
-  background: linear-gradient(180deg, #f5fcfb 0%, #dff7f4 40%, #b9e6df 100%);
-  color: var(--cor-secundaria);
+  position: relative;
+  overflow: visible;
+  background: linear-gradient(90deg, #ffffff, #e8f9f5);
   text-align: center;
   padding: 6rem 2rem;
-  border-radius: 0 0 40px 40px;
-  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.05);
-  transition: background 0.5s ease;
+}
+
+.inicio .conteudo-inicio {
+  position: relative;
+  z-index: 1;
+}
+
+.inicio .imagem-hero {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  max-width: 50%;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: var(--sombra-leve);
+  z-index: 0;
 }
 
 .conteudo-inicio h2 {
   font-family: "Poppins", sans-serif;
-  font-size: 2.8rem;
+  font-size: 3rem;
   margin-bottom: 1.5rem;
   color: var(--cor-secundaria);
+  font-weight: 700;
 }
 
 .conteudo-inicio p {
-  max-width: 750px;
+  max-width: 700px;
   margin: 0 auto 2.5rem;
-  font-size: 1.2rem;
-  color: #3c5a5a;
-  opacity: 0.9;
+  font-size: 1.25rem;
+  color: var(--cor-texto);
+  opacity: 0.85;
 }
 
 .botoes {
@@ -125,10 +139,9 @@ nav a:hover {
 .botao-secundario {
   padding: 1rem 2rem;
   border-radius: 50px;
-  text-decoration: none;
   font-weight: 600;
+  text-decoration: none;
   transition: var(--transicao);
-  box-shadow: var(--sombra-leve);
 }
 
 .botao-principal {
@@ -138,7 +151,7 @@ nav a:hover {
 
 .botao-principal:hover {
   background-color: #4fb3a5;
-  transform: translateY(-3px);
+  transform: translateY(-2px);
 }
 
 .botao-secundario {
@@ -148,11 +161,11 @@ nav a:hover {
 
 .botao-secundario:hover {
   background-color: rgba(90, 196, 183, 0.1);
-  transform: translateY(-3px);
+  transform: translateY(-2px);
 }
 
 /* =======================================
-   SEÇÕES GERAIS
+   SEÇÕES
 ======================================= */
 section {
   padding: 5rem 2rem;
@@ -161,6 +174,7 @@ section {
   background: #ffffff;
   border-radius: 20px;
   box-shadow: var(--sombra-leve);
+  position: relative;
 }
 
 section h3 {
@@ -221,34 +235,24 @@ section h3::after {
 }
 
 /* =======================================
-   ALERTA
+   FORMULÁRIO DE CONTATO EM CAIXINHAS
 ======================================= */
-.caixa-alerta {
-  background: linear-gradient(135deg, #fffbea, #fff3d4);
-  border-left: 6px solid var(--cor-primaria);
-  padding: 2rem;
-  margin-top: 4rem;
-  border-radius: 15px;
-  box-shadow: var(--sombra-leve);
-}
-
-.caixa-alerta h4 {
-  color: var(--cor-secundaria);
+.form-caixas {
+  max-width: 700px;
+  margin: 0 auto;
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 1.3rem;
+  flex-direction: column;
+  gap: 2rem;
 }
 
-/* =======================================
-   FORMULÁRIO DE CONTATO
-======================================= */
 form {
-  max-width: 600px;
-  margin: 2rem auto 0;
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
+  background: #f8fdfd;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: var(--sombra-leve);
 }
 
 label {
@@ -296,7 +300,7 @@ button:hover {
 }
 
 /* =======================================
-   RODAPÉ
+   FOOTER ANTIGO
 ======================================= */
 footer {
   background: linear-gradient(180deg, #ffffff, #e9f8f5);
@@ -362,16 +366,4 @@ footer {
     width: 42px;
     height: 42px;
   }
-}
 
-.dec-wave {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  height: 120px;
-  width: 100%;
-  pointer-events: none;
-  z-index: 0;
-}
-.inicio { position: relative; overflow: visible; }
