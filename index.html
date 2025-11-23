@@ -1,140 +1,495 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Conscientiza — Informação que salva vidas</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conscientiza - Informação e Prevenção sobre Drogas</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-  <header>
-    <div class="container">
-      <h1 class="logo">Conscientiza</h1>
-      <nav>
-        <ul>
-          <li><a href="#sobre"><i class="fas fa-users"></i> Quem Somos</a></li>
-          <li><a href="#informacoes"><i class="fas fa-info-circle"></i> Informações</a></li>
-          <li><a href="#apoio"><i class="fas fa-hand-holding-heart"></i> Apoio</a></li>
-          <li><a href="#contato"><i class="fas fa-envelope"></i> Contato</a></li>
-        </ul>
-      </nav>
+    <!-- Header e Navegação -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 0C8.954 0 0 8.954 0 20C0 31.046 8.954 40 20 40C31.046 40 40 31.046 40 20C40 8.954 31.046 0 20 0ZM20 36C11.178 36 4 28.822 4 20C4 11.178 11.178 4 20 4C28.822 4 36 11.178 36 20C36 28.822 28.822 36 20 36Z" fill="#1a5276"/>
+                        <path d="M20 8C13.373 8 8 13.373 8 20C8 26.627 13.373 32 20 32C26.627 32 32 26.627 32 20C32 13.373 26.627 8 20 8ZM20 28C15.582 28 12 24.418 12 20C12 15.582 15.582 12 20 12C24.418 12 28 15.582 28 20C28 24.418 24.418 28 20 28Z" fill="#3498db"/>
+                        <path d="M20 16C17.791 16 16 17.791 16 20C16 22.209 17.791 24 20 24C22.209 24 24 22.209 24 20C24 17.791 22.209 16 20 16Z" fill="#2ecc71"/>
+                    </svg>
+                    <h1>Conscientiza</h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#informacoes">Informações</a></li>
+                    <li><a href="#recursos">Recursos</a></li>
+                    <li><a href="#dicas">Dicas</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+                <div class="mobile-menu">☰</div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Banner Principal -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Informação que transforma vidas</h2>
+                <p>O Conscientiza é um projeto dedicado a informar e prevenir sobre os riscos do uso de drogas, promovendo escolhas saudáveis e oferecendo apoio a quem precisa.</p>
+                <a href="#informacoes" class="btn">Saiba Mais</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre -->
+    <section id="sobre" class="about">
+        <div class="container">
+            <h2 class="section-title">Sobre o Conscientiza</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>O Conscientiza é uma iniciativa sem fins lucrativos que tem como objetivo principal informar e conscientizar a população sobre os riscos associados ao uso de drogas.</p>
+                    <p>Nossa missão é fornecer informações baseadas em evidências científicas, promover a prevenção e oferecer suporte a indivíduos e famílias afetadas pela dependência química.</p>
+                    <p>Acreditamos que a educação é a ferramenta mais poderosa para prevenir o uso de drogas e promover escolhas saudáveis. Por meio de conteúdos educativos, campanhas de conscientização e parcerias com instituições de saúde, buscamos construir uma sociedade mais informada e resiliente.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1576671414121-aa0f7cfb7b98?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Equipe do Conscientiza">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Informações e Prevenção -->
+    <section id="informacoes" class="info">
+        <div class="container">
+            <h2 class="section-title">Informações e Prevenção</h2>
+            
+            <div class="info-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" data-tab="tipos">Tipos de Drogas</button>
+                    <button class="tab-btn" data-tab="efeitos">Efeitos</button>
+                    <button class="tab-btn" data-tab="dependencia">Dependência</button>
+                    <button class="tab-btn" data-tab="prevencao">Prevenção</button>
+                </div>
+                
+                <div class="tab-content active" id="tipos-tab">
+                    <div class="cards-container">
+                        <div class="card">
+                            <div class="card-img" style="background-image: url('https://blog.safesst.com.br/wp-content/uploads/2018/09/235227-abuso-de-alcool-e-drogas-entenda-o-que-e-ppaad-e-como-desenvolvelo-em-sua-empresa.jpg');"></div>
+                            <div class="card-content">
+                                <h3>Drogas Depressoras</h3>
+                                <p>Substâncias que diminuem a atividade cerebral, como álcool, benzodiazepínicos e opioides. Podem causar relaxamento, sedação e, em excesso, depressão respiratória.</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1617141636403-f511e2d5dc0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                            <div class="card-content">
+                                <h3>Drogas Estimulantes</h3>
+                                <p>Substâncias que aumentam a atividade cerebral, como cocaína, crack e anfetaminas. Podem causar euforia, agitação, insônia e, em casos extremos, parada cardíaca.</p>
+                            </div>
+                        </div>
+                       <div class="card">
+    <div class="card-img" style="background-image: url('https://spdm.org.br/wp-content/uploads/2018/05/k2_items_src_fee61bdaef9e15a087794d9505849270.jpg');"></div>
+    <div class="card-content">
+        <h3>Drogas Perturbadoras</h3>
+        <p>Substâncias que alteram a percepção da realidade, como maconha, LSD e ecstasy. Podem causar alucinações, delírios e alterações na percepção de tempo e espaço.</p>
     </div>
-  </header>
-
-  <main>
-    <!-- HERO LINEAR -->
-    <section class="inicio">
-      <div class="conteudo-inicio">
-        <h2>Informar é o primeiro passo<br>para transformar vidas</h2>
-        <p>Promovemos empatia, conhecimento e acolhimento. Nosso propósito é conscientizar sobre o uso de drogas e inspirar escolhas saudáveis.</p>
-        <div class="botoes">
-          <a href="#informacoes" class="botao-principal">Saiba mais</a>
-          <a href="#contato" class="botao-secundario">Fale conosco</a>
+</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="efeitos-tab">
+                    <div class="cards-container">
+                        <div class="card">
+                            <div class="card-content">
+                                <h3>Efeitos no Corpo</h3>
+                                <p>As drogas podem causar diversos danos físicos, incluindo problemas cardíacos, respiratórios, hepáticos e cerebrais. O uso prolongado pode levar a doenças crônicas e aumentar o risco de overdose.</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-content">
+                                <h3>Efeitos na Mente</h3>
+                                <p>O uso de drogas pode causar alterações no humor, ansiedade, depressão, psicose e outros transtornos mentais. Pode também prejudicar a memória, a concentração e a capacidade de tomar decisões.</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-content">
+                                <h3>Efeitos Sociais</h3>
+                                <p>A dependência química pode levar ao isolamento social, problemas familiares, dificuldades no trabalho e na escola, além de aumentar o risco de envolvimento com atividades ilegais.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="dependencia-tab">
+                    <div class="cards-container">
+                        <div class="card">
+                            <div class="card-content">
+                                <h3>Sinais de Dependência</h3>
+                                <ul>
+                                    <li>Necessidade de usar a droga regularmente</li>
+                                    <li>Falta de controle sobre o uso</li>
+                                    <li>Continuar usando apesar dos problemas causados</li>
+                                    <li>Abandonar atividades prazerosas</li>
+                                    <li>Sintomas de abstinência ao parar</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-content">
+                                <h3>Fatores de Risco</h3>
+                                <ul>
+                                    <li>Histórico familiar de dependência</li>
+                                    <li>Problemas de saúde mental</li>
+                                    <li>Pressão social</li>
+                                    <li>Início precoce do uso</li>
+                                    <li>Traumas e estresse</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-content">
+                                <h3>Buscar Ajuda</h3>
+                                <p>Reconhecer o problema é o primeiro passo. Buscar ajuda profissional é fundamental para o tratamento da dependência. Existem diversos serviços de apoio disponíveis.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="prevencao-tab">
+                    <div class="cards-container">
+                        <div class="card">
+                            <div class="card-content">
+                                <h3>Prevenção na Família</h3>
+                                <p>Manter um diálogo aberto sobre drogas, estabelecer limites claros, supervisionar atividades e ser um exemplo positivo são formas eficazes de prevenção no ambiente familiar.</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-content">
+                                <h3>Prevenção na Escola</h3>
+                                <p>Programas educativos, atividades extracurriculares, formação de professores e criação de um ambiente escolar seguro contribuem para a prevenção do uso de drogas.</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-content">
+                                <h3>Prevenção na Comunidade</h3>
+                                <p>Campanhas de conscientização, políticas públicas, espaços de lazer saudável e redes de apoio comunitário são estratégias importantes para a prevenção.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Gráficos com dados reais -->
+            <div class="charts-container">
+                <div class="chart">
+                    <h3>Prevalência de Uso de Cocaína/Crack no Brasil</h3>
+                    <div class="chart-data">
+                        <div class="chart-label">
+                            <span>Cocaína (já usou alguma vez)</span>
+                            <span>5,38%</span>
+                        </div>
+                        <div class="chart-bar">
+                            <div class="chart-fill" style="width: 5.38%"></div>
+                        </div>
+                        
+                        <div class="chart-label">
+                            <span>Crack (já usou alguma vez)</span>
+                            <span>1,39%</span>
+                        </div>
+                        <div class="chart-bar">
+                            <div class="chart-fill" style="width: 1.39%"></div>
+                        </div>
+                        
+                        <div class="chart-label">
+                            <span>Dependência de Crack</span>
+                            <span>0,72%</span>
+                        </div>
+                        <div class="chart-bar">
+                            <div class="chart-fill" style="width: 0.72%"></div>
+                        </div>
+                    </div>
+                    <p class="chart-source">Fonte: III Lenad (2023) - Uniad, Antidrogas</p>
+                </div>
+                
+                <div class="chart">
+                    <h3>Uso de Substâncias Ilícitas nos Últimos 12 Meses</h3>
+                    <div class="chart-data">
+                        <div class="chart-label">
+                            <span>Substâncias Ilícitas (qualquer)</span>
+                            <span>3,2%</span>
+                        </div>
+                        <div class="chart-bar">
+                            <div class="chart-fill" style="width: 3.2%"></div>
+                        </div>
+                        
+                        <div class="chart-label">
+                            <span>Maconha (já usou alguma vez)</span>
+                            <span>7,7%</span>
+                        </div>
+                        <div class="chart-bar">
+                            <div class="chart-fill" style="width: 7.7%"></div>
+                        </div>
+                    </div>
+                    <p class="chart-source">Fonte: Fiocruz + Senad</p>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
 
-    <!-- QUEM SOMOS -->
-    <section id="sobre">
-      <div class="container">
-        <h3>Quem Somos</h3>
-        <p>O <strong>Conscientiza</strong> é uma iniciativa social dedicada à prevenção e educação sobre o uso de drogas. Acreditamos que o diálogo e a informação são ferramentas poderosas para salvar vidas e fortalecer vínculos.</p>
-      </div>
-    </section>
-
-    <!-- INFORMAÇÕES SOBRE DROGAS -->
-    <section id="informacoes">
-      <div class="container">
-        <h3>Informações sobre Drogas</h3>
-        <div class="lista-drogas">
-          <div class="item-droga">
-            <div class="icone"><i class="fas fa-beer"></i></div>
-            <div class="info-droga">
-              <h4>Álcool</h4>
-              <p>Depressor do sistema nervoso central, reduz inibições e reflexos. Uso frequente pode causar dependência física e psicológica, doenças hepáticas, cardiovasculares e transtornos de humor. Risco elevado de acidentes e comportamentos impulsivos.</p>
+    <!-- Recursos e Apoio -->
+    <section id="recursos" class="resources">
+        <div class="container">
+            <h2 class="section-title">Recursos e Apoio</h2>
+            
+            <div class="filter-container">
+                <select class="city-filter" id="cityFilter">
+                    <option value="all">Todas as cidades</option>
+                    <option value="sao-paulo">São Paulo</option>
+                    <option value="rio-de-janeiro">Rio de Janeiro</option>
+                    <option value="belo-horizonte">Belo Horizonte</option>
+                    <option value="brasilia">Brasília</option>
+                    <option value="salvador">Salvador</option>
+                </select>
             </div>
-          </div>
-
-          <div class="item-droga">
-            <div class="icone"><i class="fas fa-cannabis"></i></div>
-            <div class="info-droga">
-              <h4>Maconha</h4>
-              <p>Afeta memória, atenção e coordenação motora. Uso precoce pode prejudicar o desenvolvimento cerebral. Pode causar ansiedade, alterações de humor e, em casos crônicos, comprometimento cognitivo e motivacional.</p>
+            
+            <div class="cards-container">
+                <div class="card resource-card" data-city="sao-paulo">
+                    <div class="resource-icon">🏥</div>
+                    <div class="resource-info">
+                        <h3>CAPS AD São Paulo</h3>
+                        <p>Rua das Flores, 123 - Centro</p>
+                        <p>São Paulo - SP</p>
+                        <p>Telefone: (11) 1234-5678</p>
+                    </div>
+                </div>
+                
+                <div class="card resource-card" data-city="rio-de-janeiro">
+                    <div class="resource-icon">🏥</div>
+                    <div class="resource-info">
+                        <h3>CAPS AD Rio de Janeiro</h3>
+                        <p>Avenida Brasil, 456 - Copacabana</p>
+                        <p>Rio de Janeiro - RJ</p>
+                        <p>Telefone: (21) 2345-6789</p>
+                    </div>
+                </div>
+                
+                <div class="card resource-card" data-city="belo-horizonte">
+                    <div class="resource-icon">🏥</div>
+                    <div class="resource-info">
+                        <h3>CAPS AD Belo Horizonte</h3>
+                        <p>Rua da Paz, 789 - Savassi</p>
+                        <p>Belo Horizonte - MG</p>
+                        <p>Telefone: (31) 3456-7890</p>
+                    </div>
+                </div>
+                
+                <div class="card resource-card" data-city="brasilia">
+                    <div class="resource-icon">🏥</div>
+                    <div class="resource-info">
+                        <h3>CAPS AD Brasília</h3>
+                        <p>Quadra 100, Conjunto A - Asa Sul</p>
+                        <p>Brasília - DF</p>
+                        <p>Telefone: (61) 4567-8901</p>
+                    </div>
+                </div>
+                
+                <div class="card resource-card" data-city="salvador">
+                    <div class="resource-icon">🏥</div>
+                    <div class="resource-info">
+                        <h3>CAPS AD Salvador</h3>
+                        <p>Rua do Sol, 321 - Barra</p>
+                        <p>Salvador - BA</p>
+                        <p>Telefone: (71) 5678-9012</p>
+                    </div>
+                </div>
+                
+                <div class="card resource-card" data-city="sao-paulo">
+                    <div class="resource-icon">📞</div>
+                    <div class="resource-info">
+                        <h3>Centro de Valorização da Vida</h3>
+                        <p>Atendimento 24h por telefone</p>
+                        <p>Todo o Brasil</p>
+                        <p>Telefone: 188</p>
+                    </div>
+                </div>
             </div>
-          </div>
-
-          <div class="item-droga">
-            <div class="icone"><i class="fas fa-syringe"></i></div>
-            <div class="info-droga">
-              <h4>Cocaína e Crack</h4>
-              <p>Estimulantes poderosos que aumentam energia e euforia, mas geram alta dependência. Podem causar paranoia, ataques cardíacos, AVC, colapsos mentais e danos severos ao sistema cardiovascular e respiratório.</p>
-            </div>
-          </div>
-
-          <div class="item-droga">
-            <div class="icone"><i class="fas fa-pills"></i></div>
-            <div class="info-droga">
-              <h4>Drogas Sintéticas</h4>
-              <p>Incluem ecstasy, LSD, anfetaminas e outros. Alteram percepção e humor de forma imprevisível. Risco elevado de overdose, crises psicóticas, desidratação grave e falência de órgãos. Uso repetido pode levar a dependência mental intensa.</p>
-            </div>
-          </div>
-
-          <div class="item-droga">
-            <div class="icone"><i class="fas fa-smoking"></i></div>
-            <div class="info-droga">
-              <h4>Tabaco</h4>
-              <p>Altamente viciante por conter nicotina. Pode causar câncer de pulmão, doenças respiratórias crônicas, enfisema, bronquite, e aumentar risco de doenças cardiovasculares. Fumar passivamente também representa sérios riscos à saúde.</p>
-            </div>
-          </div>
         </div>
-      </div>
     </section>
 
-    <!-- APOIO -->
-    <section id="apoio">
-      <img src="img/apoio.png" alt="Pessoas se apoiando" width="65%">
-      <div class="container">
-        <h3>Onde Buscar Ajuda</h3>
-        <ul>
-          <li><strong>CVV:</strong> Ligue <a href="tel:188">188</a> ou acesse <a href="https://www.cvv.org.br" target="_blank">cvv.org.br</a></li>
-          <li><strong>CAPS:</strong> Atendimento gratuito pelo SUS</li>
-          <li><strong>NA / AA:</strong> Grupos de apoio presenciais e online</li>
-          <li><strong>Ouvidoria SUS:</strong> 136 – apoio em saúde mental</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- FALE CONOSCO -->
-    <section id="contato">
-      <div class="container">
-        <h3>Fale Conosco</h3>
-        <div class="form-caixas">
-          <form id="formulario-contato">
-            <label for="nome">Seu nome completo</label>
-            <input type="text" id="nome" name="nome" placeholder="Digite seu nome" required>
-            <label for="email">Seu melhor e-mail</label>
-            <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
-            <label for="mensagem">Sua mensagem</label>
-            <textarea id="mensagem" name="mensagem" placeholder="Escreva sua mensagem..." required></textarea>
-            <button type="submit">Enviar <i class="fas fa-paper-plane"></i></button>
-            <p id="mensagem-formulario" style="display:none; margin-top:10px;"></p>
-          </form>
+    <!-- Dicas e Campanhas -->
+    <section id="dicas" class="tips">
+        <div class="container">
+            <h2 class="section-title">Dicas e Campanhas</h2>
+            
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <div class="tip-icon">🏃‍♂️</div>
+                    <h3>Atividade Física</h3>
+                    <p>A prática regular de exercícios libera endorfinas, promovendo bem-estar e reduzindo o desejo por substâncias.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-icon">🧘‍♀️</div>
+                    <h3>Meditação</h3>
+                    <p>Técnicas de mindfulness e meditação ajudam a gerenciar o estresse e a ansiedade, fatores de risco para o uso de drogas.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-icon">👨‍👩‍👧‍👦</div>
+                    <h3>Rede de Apoio</h3>
+                    <p>Mantenha relacionamentos saudáveis com familiares e amigos. O apoio social é fundamental para a prevenção.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-icon">🎨</div>
+                    <h3>Hobbies Criativos</h3>
+                    <p>Atividades artísticas e criativas proporcionam satisfação e propósito, alternativas saudáveis ao uso de drogas.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-icon">📚</div>
+                    <h3>Educação Continuada</h3>
+                    <p>Mantenha-se informado sobre os riscos das drogas e compartilhe conhecimento com outras pessoas.</p>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-icon">🍎</div>
+                    <h3>Alimentação Saudável</h3>
+                    <p>Uma dieta balanceada contribui para o bem-estar físico e mental, fortalecendo a resistência às tentações.</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 50px;">
+                <h3 style="margin-bottom: 20px;">Campanhas em Destaque</h3>
+                <div class="cards-container">
+                    <div class="card">
+                        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1551836026-d5c8c2a6ebfe?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                        <div class="card-content">
+                            <h3>#EscolhaConsciente</h3>
+                            <p>Campanha nacional de prevenção ao uso de drogas entre jovens, com foco na tomada de decisões informadas.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1576086213369-97a306d36557?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                        <div class="card-content">
+                            <h3>Família Informada</h3>
+                            <p>Iniciativa para capacitar famílias a reconhecer sinais de uso de drogas e buscar ajuda precocemente.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
-  </main>
 
-  <footer>
-    <div class="container">
-      <p>© 2025 Conscientiza | Informação e empatia transformam vidas</p>
-      <button id="voltar-topo"><i class="fas fa-arrow-up"></i></button>
-    </div>
-  </footer>
+    <!-- Contato -->
+    <section id="contato" class="contact">
+        <div class="container">
+            <h2 class="section-title">Entre em Contato</h2>
+            
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Nome</label>
+                        <input type="text" id="name" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Assunto</label>
+                        <select id="subject" class="form-control" required>
+                            <option value="">Selecione um assunto</option>
+                            <option value="duvida">Dúvida</option>
+                            <option value="denuncia">Denúncia</option>
+                            <option value="informacao">Informação Adicional</option>
+                            <option value="outro">Outro</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Mensagem</label>
+                        <textarea id="message" class="form-control" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn">Enviar Mensagem</button>
+                </form>
+            </div>
+        </div>
+    </section>
 
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script src="script.js"></script>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Conscientiza</h3>
+                    <p>Informação que transforma vidas. Projeto dedicado à prevenção e conscientização sobre os riscos do uso de drogas.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon">f</a>
+                        <a href="#" class="social-icon">t</a>
+                        <a href="#" class="social-icon">in</a>
+                        <a href="#" class="social-icon">ig</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Links Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#sobre">Sobre</a></li>
+                        <li><a href="#informacoes">Informações</a></li>
+                        <li><a href="#recursos">Recursos</a></li>
+                        <li><a href="#dicas">Dicas</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contato</h3>
+                    <ul class="footer-links">
+                        <li>E-mail: contato@conscientiza.org.br</li>
+                        <li>Telefone: (11) 9876-5432</li>
+                        <li>Endereço: Rua da Consciência, 100 - São Paulo, SP</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Links Úteis</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Ministério da Saúde</a></li>
+                        <li><a href="#">Fiocruz</a></li>
+                        <li><a href="#">Uniad</a></li>
+                        <li><a href="#">CVV - Centro de Valorização da Vida</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Conscientiza. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
+
+<!-- 4️⃣ Dados Reais no Gráfico Integrado
+Droga	% População (uso vitalício)
+Álcool	70%
+Maconha	6,8%
+Cocaína	6,6%
+Crack	1,2%
+Solventes	6,1%
+Benzodiazepínicos	5,6%
+Opiáceos	1,3%
+Alucinógenos	1,1%
+
+Fontes: LENAD III (UNIFESP), II Levantamento Domiciliar de Drogas (Governo Federal) -->
