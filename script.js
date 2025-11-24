@@ -102,56 +102,7 @@ function animateCharts() {
     });
 }
 
-// Inicializar animações quando a página carregar
-document.addEventListener('DOMContentLoaded', function() {
-    animateCharts();
-    
-    // Adicionar classe active ao primeiro item de cada seção
-    const firstTabContent = document.querySelector('.tab-content');
-    if (firstTabContent) {
-        firstTabContent.classList.add('active');
-    }
-});
-
-// Efeito de digitação no hero (opcional)
-function typeWriter(element, text, speed = 50) {
-    let i = 0;
-    element.innerHTML = '';
-    
-    function type() {
-        if (i < text.length) {
-            element.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
-        }
-    }
-    type();
-}
-
-// Ativar efeito de digitação se necessário
-const heroTitle = document.querySelector('.hero h2');
-if (heroTitle) {
-    const originalText = heroTitle.textContent;
-    typeWriter(heroTitle, originalText);
-}
-
-// Validação de email no formulário
-function validateEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-}
-
-document.getElementById('email').addEventListener('blur', function() {
-    const email = this.value;
-    if (email && !validateEmail(email)) {
-        this.style.borderColor = 'red';
-        // Adicionar mensagem de erro se desejar
-    } else {
-        this.style.borderColor = '#ddd';
-    }
-});
-
-// Contador de estatísticas (opcional)
+// Contador de estatísticas
 function animateCounter(element, target, duration = 2000) {
     let start = 0;
     const increment = target / (duration / 16);
@@ -167,9 +118,9 @@ function animateCounter(element, target, duration = 2000) {
     }, 16);
 }
 
-// Ativar contadores quando visíveis
+// Inicializar contadores quando visíveis
 function initCounters() {
-    const counters = document.querySelectorAll('.chart-label span:last-child');
+    const counters = document.querySelectorAll('.stat-number');
     
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -192,9 +143,34 @@ function initCounters() {
     });
 }
 
-// Inicializar contadores
-document.addEventListener('DOMContentLoaded', function() {
-    initCounters();
+// Efeito de digitação no hero (opcional)
+function typeWriter(element, text, speed = 50) {
+    let i = 0;
+    element.innerHTML = '';
+    
+    function type() {
+        if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(type, speed);
+        }
+    }
+    type();
+}
+
+// Validação de email no formulário
+function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+}
+
+document.getElementById('email').addEventListener('blur', function() {
+    const email = this.value;
+    if (email && !validateEmail(email)) {
+        this.style.borderColor = 'red';
+    } else {
+        this.style.borderColor = '#ddd';
+    }
 });
 
 // Fechar menu ao clicar fora (para mobile)
@@ -219,45 +195,21 @@ window.addEventListener('scroll', function() {
     }
 });
 
-// Carregamento de recursos externos (exemplo)
-function loadExternalResources() {
-    // Aqui você pode carregar dados de APIs externas
-    // Por exemplo, carregar lista atualizada de CAPS
-    
-    // Simulação de carregamento
-    console.log('Carregando recursos externos...');
-}
-
 // Inicializar quando a página carregar
-window.addEventListener('load', function() {
-    loadExternalResources();
+document.addEventListener('DOMContentLoaded', function() {
+    animateCharts();
+    initCounters();
     
-    // Adicionar loading state se necessário
-    const loadingElement = document.createElement('div');
-    loadingElement.id = 'loading';
-    loadingElement.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: var(--light-color);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-        transition: opacity 0.3s;
-    `;
-    loadingElement.innerHTML = '<div class="loading-spinner">Carregando...</div>';
+    // Adicionar classe active ao primeiro item de cada seção
+    const firstTabContent = document.querySelector('.tab-content');
+    if (firstTabContent) {
+        firstTabContent.classList.add('active');
+    }
     
-    document.body.appendChild(loadingElement);
-    
-    // Remover loading após um tempo (simulação)
-    setTimeout(() => {
-        loadingElement.style.opacity = '0';
-        setTimeout(() => {
-            loadingElement.remove();
-        }, 300);
-    }, 1000);
+    // Ativar efeito de digitação se necessário
+    const heroTitle = document.querySelector('.hero h2');
+    if (heroTitle) {
+        const originalText = heroTitle.textContent;
+        typeWriter(heroTitle, originalText);
+    }
 });
-
