@@ -39,34 +39,62 @@ document.getElementById('cityFilter').addEventListener('change', function() {
 // ===============================
 // INICIALIZAÇÃO DO EMAILJS
 // ===============================
-(function() {
-    emailjs.init("IjCwtseqIbiYBHcg7");
+(function(){ 
+    emailjs.init("IjCwtseqIbiYBHcg7");  
 })();
 
 // ===============================
-// ENVIO DO FORMULÁRIO
+// CONFIGURAÇÕES DO EMAILJS
 // ===============================
+const EMAILJS_SERVICE = "rosavitoria";
+const EMAILJS_TEMPLATE = "template_lqbuncc";
+
+// Formulário de contato
 document.getElementById('contactForm').addEventListener('submit', function(e) {
     e.preventDefault();
-
+    
+    // Validação básica
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
     const subject = document.getElementById('subject').value;
     const message = document.getElementById('message').value;
-
-    emailjs.send("service_d3a5qg8", "template_lqbuncc", {
+    
+    if (!name || !email || !subject || !message) {
+        alert('Por favor, preencha todos os campos obrigatórios.');
+        return;
+    }
+    
+    // Validação de email
+    if (!validateEmail(email)) {
+        alert('Por favor, insira um email válido.');
+        return;
+    }
+    
+    // Mostrar loading
+    const submitBtn = this.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Enviando...';
+    submitBtn.disabled = true;
+    
+    // Envio via EmailJS
+emailjs.send("rosavitoria", "template_lqbuncc", {
         nome: name,
         email: email,
         assunto: subject,
         mensagem: message
     })
     .then(() => {
-        alert('Mensagem enviada com sucesso!');
-        document.getElementById('contactForm').reset();
+        mostrarMensagem("Mensagem enviada com sucesso! 💚 Entraremos em contato em breve.", "sucesso");
+        this.reset();
     })
     .catch((error) => {
         console.error('Erro ao enviar:', error);
-        alert('Erro ao enviar mensagem. Tente novamente mais tarde.');
+        mostrarMensagem("Ops! Algo deu errado. Tente novamente mais tarde.", "erro");
+    })
+    .finally(() => {
+        // Restaurar botão
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
     });
 });
 
@@ -209,25 +237,6 @@ window.addEventListener('scroll', function() {
     }
 });
 
-// Inicializar quando a página carregar
-document.addEventListener('DOMContentLoaded', function() {
-    animateCharts();
-    initCounters();
-    
-    // Adicionar classe active ao primeiro item de cada seção
-    const firstTabContent = document.querySelector('.tab-content');
-    if (firstTabContent) {
-        firstTabContent.classList.add('active');
-    }
-    
-    // Ativar efeito de digitação se necessário
-    const heroTitle = document.querySelector('.hero h2');
-    if (heroTitle) {
-        const originalText = heroTitle.textContent;
-        typeWriter(heroTitle, originalText);
-    }
-});
-
 // ===============================
 // BOTÃO VOLTAR AO TOPO
 // ===============================
@@ -258,15 +267,30 @@ function validarEmail(email) {
 }
 
 function mostrarMensagem(texto, tipo) {
-    const mensagemFormulario = document.getElementById('mensagemFormulario');
-    if (!mensagemFormulario) return;
+    // Criar elemento de mensagem se não existir
+    let mensagemFormulario = document.getElementById('mensagemFormulario');
+    if (!mensagemFormulario) {
+        mensagemFormulario = document.createElement('div');
+        mensagemFormulario.id = 'mensagemFormulario';
+        mensagemFormulario.style.cssText = 'position: fixed; top: 20px; right: 20px; padding: 15px 20px; border-radius: 5px; z-index: 10000; font-weight: 600; display: none;';
+        document.body.appendChild(mensagemFormulario);
+    }
     
     mensagemFormulario.style.display = "block";
     mensagemFormulario.textContent = texto;
     mensagemFormulario.className = "";
 
-    if (tipo === "sucesso") mensagemFormulario.classList.add("mensagem-sucesso");
-    else mensagemFormulario.classList.add("mensagem-erro");
+    if (tipo === "sucesso") {
+        mensagemFormulario.classList.add("mensagem-sucesso");
+        mensagemFormulario.style.backgroundColor = '#d4edda';
+        mensagemFormulario.style.color = '#155724';
+        mensagemFormulario.style.border = '1px solid #c3e6cb';
+    } else {
+        mensagemFormulario.classList.add("mensagem-erro");
+        mensagemFormulario.style.backgroundColor = '#f8d7da';
+        mensagemFormulario.style.color = '#721c24';
+        mensagemFormulario.style.border = '1px solid #f5c6cb';
+    }
 
     mensagemFormulario.style.animation = "fadeIn 0.5s ease-in";
 
@@ -289,3 +313,22 @@ estiloMensagens.textContent = `
     @keyframes fadeOut { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-10px); } }
 `;
 document.head.appendChild(estiloMensagens);
+
+// Inicializar quando a página carregar
+document.addEventListener('DOMContentLoaded', function() {
+    animateCharts();
+    initCounters();
+    
+    // Adicionar classe active ao primeiro item de cada seção
+    const firstTabContent = document.querySelector('.tab-content');
+    if (firstTabContent) {
+        firstTabContent.classList.add('active');
+    }
+    
+    // Ativar efeito de digitação se necessário
+    const heroTitle = document.querySelector('.hero h2');
+    if (heroTitle) {
+        const originalText = heroTitle.textContent;
+        typeWriter(heroTitle, originalText);
+    }
+});
