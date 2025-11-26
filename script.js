@@ -76,17 +76,24 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
     submitBtn.textContent = 'Enviando...';
     submitBtn.disabled = true;
     
-    // Envio via EmailJS
+// Envio via EmailJS
 emailjs.send("rosavitoria", "template_lqbuncc", {
+    nome: name,
+    email: email,
+    assunto: subject,
+    mensagem: message
+})
+.then(() => {
+    mostrarMensagem("Mensagem enviada com sucesso! 💚 Entraremos em contato em breve.", "sucesso");
+    this.reset();
+
+    // Envio da resposta automática
+    emailjs.send("rosavitoria", "template_9iz7aej", {
         nome: name,
         email: email,
-        assunto: subject,
-        mensagem: message
-    })
-    .then(() => {
-        mostrarMensagem("Mensagem enviada com sucesso! 💚 Entraremos em contato em breve.", "sucesso");
-        this.reset();
-    })
+        assunto: subject
+    });
+})
     .catch((error) => {
         console.error('Erro ao enviar:', error);
         mostrarMensagem("Ops! Algo deu errado. Tente novamente mais tarde.", "erro");
