@@ -1,3 +1,23 @@
+// ===============================
+// CONFIGURAÇÕES DO EMAILJS - ROSA VITÓRIA
+// ===============================
+const EMAILJS_CONFIG = {
+    PUBLIC_KEY: "IjCwtseqIbiYBHcg7",
+    SERVICE_ID: "rosavitoria",
+    USER_EMAIL: "rosavitoriafernandes@outlook.com",
+    TEMPLATES: {
+        CONTATO: "template_lqbuncc",
+        RESPOSTA_AUTOMATICA: "template_9iz7aej"
+    }
+};
+
+// ===============================
+// INICIALIZAÇÃO DO EMAILJS
+// ===============================
+(function() {
+    emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
+})();
+
 // Menu mobile
 document.querySelector('.mobile-menu').addEventListener('click', function() {
     document.querySelector('.nav-links').classList.toggle('active');
@@ -36,20 +56,7 @@ document.getElementById('cityFilter').addEventListener('change', function() {
     });
 });
 
-// ===============================
-// INICIALIZAÇÃO DO EMAILJS
-// ===============================
-(function(){ 
-    emailjs.init("IjCwtseqIbiYBHcg7");  
-})();
-
-// ===============================
-// CONFIGURAÇÕES DO EMAILJS
-// ===============================
-const EMAILJS_SERVICE = "rosavitoria";
-const EMAILJS_TEMPLATE = "template_lqbuncc";
-
-// Formulário de contato
+// Formulário de contato CORRIGIDO
 document.getElementById('contactForm').addEventListener('submit', function(e) {
     e.preventDefault();
     
@@ -76,24 +83,37 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
     submitBtn.textContent = 'Enviando...';
     submitBtn.disabled = true;
     
-// Envio via EmailJS
-emailjs.send("rosavitoria", "template_lqbuncc", {
-    nome: name,
-    email: email,
-    assunto: subject,
-    mensagem: message
-})
-.then(() => {
-    mostrarMensagem("Mensagem enviada com sucesso! 💚 Entraremos em contato em breve.", "sucesso");
-    this.reset();
+    // Envio via EmailJS COM CONFIGURAÇÕES CORRETAS
+    emailjs.send(
+        EMAILJS_CONFIG.SERVICE_ID, 
+        EMAILJS_CONFIG.TEMPLATES.CONTATO, 
+        {
+            nome: name,
+            email: email,
+            assunto: subject,
+            mensagem: message,
+            destinatario: EMAILJS_CONFIG.USER_EMAIL
+        }
+    )
+    .then(() => {
+        mostrarMensagem("Mensagem enviada com sucesso! 💚 Entraremos em contato em breve.", "sucesso");
+        this.reset();
 
-    // Envio da resposta automática
-    emailjs.send("rosavitoria", "template_9iz7aej", {
-        nome: name,
-        email: email,
-        assunto: subject
-    });
-})
+        // Envio da resposta automática
+        return emailjs.send(
+            EMAILJS_CONFIG.SERVICE_ID, 
+            EMAILJS_CONFIG.TEMPLATES.RESPOSTA_AUTOMATICA, 
+            {
+                nome: name,
+                email: email,
+                assunto: subject,
+                remetente: EMAILJS_CONFIG.USER_EMAIL
+            }
+        );
+    })
+    .then(() => {
+        console.log('Email de confirmação enviado com sucesso');
+    })
     .catch((error) => {
         console.error('Erro ao enviar:', error);
         mostrarMensagem("Ops! Algo deu errado. Tente novamente mais tarde.", "erro");
