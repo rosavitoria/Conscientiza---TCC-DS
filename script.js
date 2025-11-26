@@ -56,6 +56,32 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
     this.reset();
 });
 
+// ===============================
+// INICIALIZAÇÃO DO EMAILJS
+// ===============================
+// ===============================
+
+emailjs.send("service_d3a5qg8", "template_58w8n8r", {
+  nome: nome,
+  email: email,
+  mensagem: mensagem
+})
+.then(() => {
+  console.log("Email enviado!");
+})
+.catch((error) => {
+  console.error("Erro ao enviar:", error);
+});
+
+
+
+emailjs.send("service_d3a5qg8", "template_58w8n8r", {
+nome: nome,
+email: email,
+mensagem: mensagem
+})
+
+
 // Scroll suave para âncoras
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
