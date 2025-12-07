@@ -1,21 +1,32 @@
 <!DOCTYPE html>
+<!-- declaração do html5 - define a versão atual do html -->
 <html lang="pt-BR">
+<!-- atributo lang importante para acessibilidade e seo -->
+
 <head>
+    <!-- meta charset utf-8 essencial para caracteres em português -->
     <meta charset="UTF-8">
+    <!-- viewport responsivo - controla escala inicial em dispositivos móveis -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conscientiza - Informação e Prevenção sobre Drogas</title>
+    <!-- link para arquivo css externo - separação de concerns -->
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <!-- Header e Navegação -->
+    <!-- header com navegação principal - elemento semântico -->
     <header>
         <div class="container">
+            <!-- nav elemento semântico para navegação -->
             <nav class="navbar">
                 <div class="logo">
+                    <!-- imagem externa via cdn - pode afetar performance se cair -->
                     <img src="https://thumbs.dreamstime.com/b/as-pessoas-se-preocupam-com-m%C3%A3os-segurando-fam%C3%ADlia-e-mantenha-seguran%C3%A7a-humana-protegendo-o-%C3%ADcone-do-logotipo-da-vida-220042245.jpg" alt="Logo Conscientiza">
                     <h1>Conscientiza</h1>
                 </div>
+                <!-- lista de navegação - será transformada em menu mobile via js -->
                 <ul class="nav-links">
+                    <!-- âncoras internas para navegação suave -->
                     <li><a href="#home">Home</a></li>
                     <li><a href="#sobre">Sobre</a></li>
                     <li><a href="#informacoes">Informações</a></li>
@@ -23,23 +34,25 @@
                     <li><a href="#dicas">Dicas</a></li>
                     <li><a href="#contato">Contato</a></li>
                 </ul>
+                <!-- botão do menu mobile - precisa de js para toggle -->
                 <div class="mobile-menu">☰</div>
             </nav>
         </div>
     </header>
 
-    <!-- Banner Principal -->
+    <!-- banner hero com call-to-action - padrão comum em landing pages -->
     <section id="home" class="hero">
         <div class="container">
             <div class="hero-content">
                 <h2>Informação que transforma vidas</h2>
                 <p>O Conscientiza é um projeto dedicado a informar e prevenir sobre os riscos do uso de drogas, promovendo escolhas saudáveis e oferecendo apoio a quem precisa.</p>
+                <!-- botão com âncora interna para scroll suave -->
                 <a href="#informacoes" class="btn">Saiba Mais</a>
             </div>
         </div>
     </section>
 
-    <!-- Sobre -->
+    <!-- seção sobre - layout flexível para texto e imagem -->
     <section id="sobre" class="about">
         <div class="container">
             <h2 class="section-title">Sobre o Conscientiza</h2>
@@ -50,56 +63,53 @@
                     <p>Acreditamos que a educação é a ferramenta mais poderosa para prevenir o uso de drogas e promover escolhas saudáveis. Por meio de conteúdos educativos e campanhas de conscientização, buscamos construir uma sociedade mais informada e resiliente.</p>
                 </div>
                 <div class="about-image">
+                    <!-- imagem do unsplash via cdn - boa qualidade mas externa -->
                     <img src="https://images.unsplash.com/photo-1576671414121-aa0f7cfb7b98?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Equipe do Conscientiza">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Informações e Prevenção -->
+    <!-- seção de informações com estatísticas e gráficos -->
     <section id="informacoes" class="info">
         <div class="container">
             <h2 class="section-title">Informações e Prevenção</h2>
 
-            <!-- Destaque com dados confiáveis -->
+            <!-- grid de estatísticas - layout responsivo com css grid -->
             <div class="stats-grid">
                 <div class="stat-card">
-                    <div class="stat-number">370 mil</div>
-                    <div class="stat-text">usuários regulares de crack e similares nas capitais brasileiras</div>
-                    <div class="stat-source">Fonte: FIOCRUZ, Pesquisa Nacional sobre o Uso de Crack, 2014</div>
+                    <div class="stat-number">30,1</div>
+                    <div class="stat-text">dos Brasileiros entrevistados relataram ter consumido alcool nos útimos 30 dias.</div>
+                    <div class="stat-source">Fonte: FIOCRUZ, III Levantamento Nacional sobre o uso de Drogas pela população Brasileira, 2017</div>
                 </div>
 
                 <div class="stat-card">
-                    <div class="stat-number">2,3 milhões</div>
-                    <div class="stat-text">de brasileiros são dependentes de álcool</div>
-                    <div class="stat-source">Fonte: FIOCRUZ, 3º Levantamento Nacional sobre Drogas, 2019</div>
+                    <div class="stat-number">34,3</div>
+                    <div class="stat-text">dos Brasileiros menores de idade já consumiram álcool.</div>
+                    <div class="stat-source">Fonte: FIOCRUZ, III Levantamento Nacional sobre o uso de Drogas pela população Brasileira, 2017</div>
                 </div>
 
                 <div class="stat-card">
-                    <div class="stat-number">7,7%</div>
-                    <div class="stat-text">da população adulta já usou maconha na vida</div>
-                    <div class="stat-source">Fonte: FIOCRUZ, 3º Levantamento Nacional sobre Drogas, 2019</div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-number">39%</div>
-                    <div class="stat-text">dos usuários de crack estão em situação de rua</div>
-                    <div class="stat-source">Fonte: FIOCRUZ, Pesquisa Nacional sobre o Uso de Crack, 2014</div>
+                    <div class="stat-number">31,8%</div>
+                    <div class="stat-text">dos Brasileiros menores de idade entrevistados fumaram vape no último mês.</div>
+                    <div class="stat-source">Fonte: Ministério da Justiça e Segurança Pública (MJSP) 2025</div>
                 </div>
             </div>
 
             <br><br>
 
-            <!-- Gráficos com dados reais -->
+            <!-- gráficos implementados com css puro (não usa bibliotecas) -->
             <div class="charts-container">
                 <div class="chart">
                     <h3>Prevalência de Uso de Substâncias no Brasil</h3>
                     <div class="chart-data">
+                        <!-- cada barra tem width inline controlada por style attribute -->
                         <div class="chart-label">
                             <span>Álcool (uso na vida)</span>
                             <span>66,4%</span>
                         </div>
                         <div class="chart-bar">
+                            <!-- width definida inline - poderia usar data-attributes e js -->
                             <div class="chart-fill" style="width: 66.4%"></div>
                         </div>
                         
@@ -135,15 +145,16 @@
                     <div class="chart-data">
                         <div class="chart-label">
                             <span>Homens entre usuários</span>
-                            <span>78,7%</span>
+                            <span>80%</span>
                         </div>
                         <div class="chart-bar">
+                            <!-- classe específica para gráfico de crack -->
                             <div class="chart-fill crack-bar" style="width: 78.7%"></div>
                         </div>
                         
                         <div class="chart-label">
                             <span>Com ensino fundamental incompleto</span>
-                            <span>49%</span>
+                            <span>50%</span>
                         </div>
                         <div class="chart-bar">
                             <div class="chart-fill crack-bar" style="width: 49%"></div>
@@ -165,40 +176,14 @@
                             <div class="chart-fill crack-bar" style="width: 28%"></div>
                         </div>
                     </div>
-                    <p class="chart-source">Fonte: FIOCRUZ, Pesquisa Nacional sobre o Uso de Crack, 2014</p>
+                    <p class="chart-source">Fonte: Programa de assistência social "De Braços Abertos". FIOCRUZ, Pesquisa Nacional sobre o Uso de Crack, 2014</p>
                 </div>
             </div>
+            <br><br>
 
-            <!-- Dados Adicionais Importantes -->
-            <div class="additional-stats">
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-number">14%</div>
-                        <div class="stat-text">dos estudantes (13-17 anos) já usaram drogas ilícitas</div>
-                        <div class="stat-source">Fonte: PeNSE - IBGE, 2019</div>
-                    </div>
-
-                    <div class="stat-card">
-                        <div class="stat-number">2.500+</div>
-                        <div class="stat-text">CAPS AD para atendimento gratuito em todo Brasil</div>
-                        <div class="stat-source">Fonte: Ministério da Saúde, 2023</div>
-                    </div>
-
-                    <div class="stat-card">
-                        <div class="stat-number">26,4%</div>
-                        <div class="stat-text">dos adultos relataram consumo abusivo de álcool</div>
-                        <div class="stat-source">Fonte: Vigitel Brasil, Ministério da Saúde, 2023</div>
-                    </div>
-
-                    <div class="stat-card">
-                        <div class="stat-number">45%</div>
-                        <div class="stat-text">dos dependentes de álcool têm prejuízos graves</div>
-                        <div class="stat-source">Fonte: FIOCRUZ, 3º Levantamento Nacional, 2019</div>
-                    </div>
-                </div>
-            </div>
-
+            <!-- sistema de tabs/abas - conteúdo dinâmico sem recarregar página -->
             <div class="info-tabs">
+                <!-- botões das tabs com data-attributes para controle via js -->
                 <div class="tab-buttons">
                     <button class="tab-btn active" data-tab="tipos">Tipos de Drogas</button>
                     <button class="tab-btn" data-tab="efeitos">Efeitos</button>
@@ -206,9 +191,11 @@
                     <button class="tab-btn" data-tab="prevencao">Prevenção</button>
                 </div>
 
+                <!-- conteúdo da primeira tab (visível por padrão) -->
                 <div class="tab-content active" id="tipos-tab">
                     <div class="cards-container">
                         <div class="card">
+                            <!-- background-image inline no style attribute -->
                             <div class="card-img" style="background-image: url('https://blog.safesst.com.br/wp-content/uploads/2018/09/235227-abuso-de-alcool-e-drogas-entenda-o-que-e-ppaad-e-como-desenvolvelo-em-sua-empresa.jpg');"></div>
                             <div class="card-content">
                                 <h3>Drogas Depressoras</h3>
@@ -239,13 +226,14 @@
                                 <p>Substâncias que alteram a percepção da realidade, como maconha, LSD, ecstasy etc. Podem causar alucinações, distorções perceptivas e risco de danos psicológicos.</p>
                                 <div class="card-stat">
                                     <span class="stat-highlight">Maconha é a substância ilícita mais consumida no Brasil</span>
-                                    <span class="stat-source">Fonte: UNODC, 2023</span>
+                                    <span class="stat-source">Fonte: II LENAD - UNIFESP, 2012</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
+                <!-- demais tabs com conteúdo semelhante mas diferente -->
                 <div class="tab-content" id="efeitos-tab">
                     <div class="cards-container">
                         <div class="card">
@@ -276,7 +264,7 @@
                                 <p>O uso problemático de substâncias pode levar ao isolamento social, desgaste familiar, dificuldades no trabalho ou estudo, e vulnerabilidade social.</p>
                                 <div class="card-stat">
                                     <span class="stat-highlight">Brasil gasta R$ 9,5 bilhões/ano com custos relacionados ao álcool</span>
-                                    <span class="stat-source">Fonte: CEBRID/UNIFESP</span>
+                                    <span class="stat-source">Fonte: Fiocruz</span>
                                 </div>
                             </div>
                         </div>
@@ -377,12 +365,19 @@
             </div>
         </div>
     </section>
+<br>
 
-    <!-- Recursos e Apoio -->
-    <section id="recursos" class="resources">
+    <!-- botão para toggle da seção de recursos -->
+     <button id="toggleRecursos" class="btn">
+    Mostrar Recursos e Apoio
+</button>
+
+   <!-- seção de recursos inicialmente oculta (display: none) -->
+   <section id="recursos" class="resources" style="display: none;">
         <div class="container">
             <h2 class="section-title">Recursos e Apoio</h2>
             
+            <!-- filtro por cidade - precisa de js para funcionar -->
             <div class="filter-container">
                 <select class="city-filter" id="cityFilter">
                     <option value="all">Todas as cidades</option>
@@ -391,15 +386,12 @@
                     <option value="belo-horizonte">Belo Horizonte</option>
                     <option value="brasilia">Brasília</option>
                     <option value="salvador">Salvador</option>
-                    <option value="fortaleza">Fortaleza</option>
-                    <option value="curitiba">Curitiba</option>
-                    <option value="porto-alegre">Porto Alegre</option>
-                    <option value="recife">Recife</option>
                 </select>
             </div>
             
+            <!-- grid de cards de recursos - filtrados por data-city attribute -->
             <div class="cards-container" id="caps">
-                <!-- São Paulo -->
+                <!-- card de são paulo com data-city attribute -->
                 <div class="card resource-card" data-city="sao-paulo">
                     <div class="resource-icon">🏥</div>
                     <div class="resource-info">
@@ -444,7 +436,7 @@
                     </div>
                 </div>
 
-                <!-- Rio de Janeiro -->
+                <!-- rio de janeiro -->
                 <div class="card resource-card" data-city="rio-de-janeiro">
                     <div class="resource-icon">🏥</div>
                     <div class="resource-info">
@@ -456,7 +448,7 @@
                     </div>
                 </div>
 
-                <!-- Belo Horizonte -->
+                <!-- belo horizonte -->
                 <div class="card resource-card" data-city="belo-horizonte">
                     <div class="resource-icon">🏥</div>
                     <div class="resource-info">
@@ -467,7 +459,7 @@
                     </div>
                 </div>
 
-                <!-- São Paulo -->
+                <!-- são paulo -->
                 <div class="card resource-card" data-city="sao-paulo">
                     <div class="resource-icon">🏥</div>
                     <div class="resource-info">
@@ -479,31 +471,7 @@
                     </div>
                 </div>
 
-                <!-- Recife -->
-                <div class="card resource-card" data-city="recife">
-                    <div class="resource-icon">🏥</div>
-                    <div class="resource-info">
-                        <h3>CAPS AD Recife</h3>
-                        <p>Av. Cruz Cabugá, 1191 – Santo Amaro</p>
-                        <p>Recife - PE</p>
-                        <p>Telefone: (81) 3355‑3125</p>
-                        <p class="service-info">Atendimento multiprofissional</p>
-                    </div>
-                </div>
-
-                <!-- Fortaleza -->
-                <div class="card resource-card" data-city="fortaleza">
-                    <div class="resource-icon">🏥</div>
-                    <div class="resource-info">
-                        <h3>CAPS AD III Fortaleza</h3>
-                        <p>Av. Luciano Carneiro, 2131 – Vila União</p>
-                        <p>Fortaleza - CE</p>
-                        <p>Telefone: (85) 3254‑1537</p>
-                        <p class="service-info">Atendimento multiprofissional</p>
-                    </div>
-                </div>
-
-                <!-- Salvador -->
+                <!-- salvador -->
                 <div class="card resource-card" data-city="salvador">
                     <div class="resource-icon">🏥</div>
                     <div class="resource-info">
@@ -515,7 +483,7 @@
                     </div>
                 </div>
 
-                <!-- Brasília -->
+                <!-- brasília -->
                 <div class="card resource-card" data-city="brasilia">
                     <div class="resource-icon">🏥</div>
                     <div class="resource-info">
@@ -528,7 +496,7 @@
                 </div>
             </div>
 
-            <!-- Informações sobre como encontrar mais CAPS -->
+            <!-- informações sobre como encontrar mais caps -->
             <div class="caps-info">
                 <h3>Como encontrar mais unidades</h3>
                 <div class="info-cards">
@@ -539,6 +507,7 @@
                     <div class="info-card">
                         <h4>🌐 Site do Ministério da Saúde</h4>
                         <p>Consulte o mapa nacional de CAPS AD no portal do governo</p>
+                        <!-- link externo com target="_blank" -->
                         <a href="https://www.gov.br/saude/pt-br" target="_blank" class="btn-link">Acessar</a>
                     </div>
                     <div class="info-card">
@@ -552,13 +521,14 @@
     </section>
 
 
-    <!-- Dicas e Campanhas -->
+    <!-- seção de dicas com ícones svg inline -->
     <section id="dicas" class="tips">
         <div class="container">
             <h2 class="section-title">Dicas e Campanhas</h2>
             
             <div class="tips-grid">
                 <div class="tip-card">
+                    <!-- svg inline - melhor performance que font icons -->
                     <div class="tip-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M18.89 14.75l-4.09-2.04c-.28-.14-.58-.21-.89-.21H13v-6c0-.83-.67-1.5-1.5-1.5S10 5.67 10 6.5v10.74l-3.25-.74a.99.99 0 0 0-.92.26c-.35.35-.39.91-.08 1.32l3.01 4.02c.36.48 1 .73 1.64.73h6.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5H13v-8.61l2.3 1.15c.22.11.46.17.7.17h.5c.55 0 1-.45 1-1s-.45-1-1-1h-.5c-.08 0-.16.02-.24.04z"/>
@@ -619,6 +589,7 @@
                 </div>
             </div>
             
+            <!-- seção de campanhas mantida intacta -->
             <div style="text-align: center; margin-top: 50px;">
                 <h3 style="margin-bottom: 20px;">Campanhas em Destaque</h3>
                 <div class="cards-container">
@@ -641,19 +612,19 @@
                     </div>
 
                     <div class="card">
-                        <div class="card-img" style="background-image: url('https://telessaude.se.gov.br/wp-content/uploads/2024/02/Dia_Nacional_de_Combate_%C3%A0s_Drogas_e_Alcoolismo_site-1.jpg');"></div>
+                        <div class="card-img" style="background-image: url('https://hospitalsantamonica.com.br/wp-content/uploads/2022/08/7-dicas-para-nao-usar-drogas-e1669664746264.jpeg);"></div>
                         <div class="card-content">
-                            <h3>Campanha Nacional de Prevenção às Drogas</h3>
-                            <p>Iniciativa do Ministério da Saúde com foco na conscientização sobre os riscos do uso de substâncias ilícitas.</p>
-                            <a href="https://www.saude.gov.br/noticias/agencia-saude/48813-ministerio-da-saude-lanca-campanha-de-prevencao-as-drogas" class="btn-link" target="_blank">Saiba mais</a>
+                            <h3>Dicas de como superar a vontade de drogas</h3>
+                            <p>Iniciativa do Hospital Santa Mônica com foco em auxiliar a abstinência de substâncias.</p>
+                            <a href="https://hospitalsantamonica.com.br/7-dicas-de-como-tirar-a-vontade-de-usar-droga/" class="btn-link" target="_blank">Saiba mais</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </section> <br><br>
 
-    <!-- Contato -->
+    <!-- seção de contato com formulário -->
     <section id="contato" class="contact">
         <div class="container">
             <h2 class="section-title">
@@ -661,6 +632,7 @@
             </h2>
             
             <div class="contact-form">
+                <!-- formulário sem action/method - será enviado via emailjs -->
                 <form id="contactForm">
                     <div class="form-group">
                         <label for="name">Nome</label>
@@ -688,6 +660,7 @@
                         <textarea id="message" name="mensagem" class="form-control" rows="5" required></textarea>
                     </div>
 
+                    <!-- div para mensagens de feedback do formulário -->
                     <div id="mensagemFormulario" style="display:none;"></div>
 
                     <button type="submit" class="btn">Enviar Mensagem</button>
@@ -696,61 +669,83 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Conscientiza</h3>
-                    <p>Informação que transforma vidas. Projeto dedicado à prevenção e conscientização sobre os riscos do uso de drogas.</p>
-                    <div class="social-links">
-                        <a href="#" class="social-icon">f</a>
-                        <a href="#" class="social-icon">t</a>
-                        <a href="#" class="social-icon">in</a>
-                        <a href="https://www.instagram.com/conscientiza.br/?igsh=ODR2MGQ2OGVnZWVy" class="social-icon">ig</a>
+<!-- footer compacto com logo -->
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <!-- seção principal com logo -->
+            <div class="footer-main">
+                <!-- logo e marca -->
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="https://thumbs.dreamstime.com/b/as-pessoas-se-preocupam-com-m%C3%A3os-segurando-fam%C3%ADlia-e-mantenha-seguran%C3%A7a-humana-protegendo-o-%C3%ADcone-do-logotipo-da-vida-220042245.jpg" 
+                             alt="Logo Conscientiza" 
+                             class="footer-logo-img">
+                        <div class="footer-brand-text">
+                            <h3>Conscientiza</h3>
+                            <p class="footer-tagline">Informação que transforma vidas</p>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="footer-column">
-                    <h3>Links Rápidos</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#sobre">Sobre</a></li>
-                        <li><a href="#informacoes">Informações</a></li>
-                        <li><a href="#recursos">Recursos</a></li>
-                        <li><a href="#dicas">Dicas</a></li>
-                        <li><a href="#contato">Contato</a></li>
-                    </ul>
+                <!-- links compactos -->
+                <div class="footer-links-compact">
+                    <div class="links-group">
+                        <h4>Navegação</h4>
+                        <ul>
+                            <li><a href="#home">Home</a></li>
+                            <li><a href="#informacoes">Informações</a></li>
+                            <li><a href="#recursos">Recursos</a></li>
+                            <li><a href="#contato">Contato</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="links-group">
+                        <h4>Contato</h4>
+                        <ul>
+                            <li><span class="contact-icon">✉️</span> contato@conscientiza.org.br</li>
+                            <li><span class="contact-icon">📞</span> (11) 9123-4567</li>
+                        </ul>
+                    </div>
                 </div>
                 
-                <div class="footer-column">
-                    <h3>Contato</h3>
-                    <ul class="footer-links">
-                        <li>E-mail: contato@conscientiza.org.br</li>
-                        <li>Telefone: (11) 9123-4567</li>
-                        <li>Endereço: Rua da Consciência, 100 - São Paulo, SP</li>
-                    </ul>
+                <!-- seção instagram -->
+                <div class="instagram-section">
+                    <p class="instagram-text">Siga-nos no Instagram</p>
+                    <a href="https://www.instagram.com/conscientiza.br/?igsh=ODR2MGQ2OGVnZWVy" 
+                       class="social-icon instagram" 
+                       target="_blank" 
+                       aria-label="Instagram Conscientiza">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                        @conscientiza.br
+                    </a>
                 </div>
-                
-                <div class="footer-column">
-                    <h3>Links Úteis</h3>
-                    <ul class="footer-links">
-                        <li><a href="https://www.gov.br/saude/pt-br" target="_blank">Ministério da Saúde</a></li>
-                        <li><a href="https://www.fiocruz.br/" target="_blank">Fiocruz</a></li>
-                        <li><a href="https://www.uniad.org.br/" target="_blank">Uniad</a></li>
-                        <li><a href="https://www.cvv.org.br/" target="_blank">CVV - Centro de Valorização da Vida</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2025 Conscientiza. Todos os direitos reservados.</p>
             </div>
         </div>
-    </footer>
-
-    <!-- Scripts -->
+        
+        <!-- direitos autorais e links úteis -->
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <p>&copy; 2025 Conscientiza - Todos os direitos reservados</p>
+                <div class="useful-links">
+                    <a href="https://www.gov.br/saude/pt-br" target="_blank">Ministério da Saúde</a>
+                    <span class="divider">•</span>
+                    <a href="https://www.cvv.org.br/" target="_blank">CVV - Apoio</a>
+                    <span class="divider">•</span>
+                    <a href="https://www.fiocruz.br/" target="_blank">Fiocruz</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+    <!-- scripts no final do body para melhor performance -->
+    <!-- emailjs cdn - serviço de envio de emails sem backend -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <!-- script próprio do site -->
     <script src="script.js"></script>
 </body>
 </html>

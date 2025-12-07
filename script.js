@@ -18,31 +18,41 @@ const EMAILJS_CONFIG = {
     emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
 })();
 
-// Menu mobile
+// menu mobile - toggle simples para mostrar/esconder navegação
 document.querySelector('.mobile-menu').addEventListener('click', function() {
-    document.querySelector('.nav-links').classList.toggle('active');
+    const navLinks = document.querySelector('.nav-links');
+    navLinks.classList.toggle('active');
+    this.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
 });
 
-// Tabs de informações
+// fechar menu mobile ao clicar em link
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        document.querySelector('.nav-links').classList.remove('active');
+        document.querySelector('.mobile-menu').textContent = '☰';
+    });
+});
+
+// sistema de tabs - alternância entre conteúdos sem recarregar página
 const tabButtons = document.querySelectorAll('.tab-btn');
 const tabContents = document.querySelectorAll('.tab-content');
 
 tabButtons.forEach(button => {
     button.addEventListener('click', () => {
-        // Remove classe active de todos os botões e conteúdos
+        // remove classe active de todos os botões e conteúdos
         tabButtons.forEach(btn => btn.classList.remove('active'));
         tabContents.forEach(content => content.classList.remove('active'));
         
-        // Adiciona classe active ao botão clicado
+        // adiciona classe active ao botão clicado
         button.classList.add('active');
         
-        // Mostra o conteúdo correspondente
+        // mostra o conteúdo correspondente baseado no data-attribute
         const tabId = button.getAttribute('data-tab') + '-tab';
         document.getElementById(tabId).classList.add('active');
     });
 });
 
-// Filtro por cidade
+// filtro por cidade - mostra/oculta cards baseado na seleção
 document.getElementById('cityFilter').addEventListener('change', function() {
     const selectedCity = this.value;
     const resourceCards = document.querySelectorAll('.resource-card');
@@ -56,163 +66,199 @@ document.getElementById('cityFilter').addEventListener('change', function() {
     });
 });
 
-// Formulário de contato CORRIGIDO
+// formulário de contato com emailjs - validação e envio assíncrono
 document.getElementById('contactForm').addEventListener('submit', function(e) {
     e.preventDefault();
     
-    // Validação básica
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
+    // validação básica dos campos obrigatórios
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
     const subject = document.getElementById('subject').value;
-    const message = document.getElementById('message').value;
+    const message = document.getElementById('message').value.trim();
     
     if (!name || !email || !subject || !message) {
-        alert('Por favor, preencha todos os campos obrigatórios.');
+        mostrarMensagem('por favor, preencha todos os campos obrigatórios.', 'erro');
         return;
     }
     
-    // Validação de email
-    if (!validateEmail(email)) {
-        alert('Por favor, insira um email válido.');
+    // validação de email com regex
+    if (!validarEmail(email)) {
+        mostrarMensagem('por favor, insira um email válido.', 'erro');
         return;
     }
     
-    // Mostrar loading
+    // estado de loading no botão de envio
     const submitBtn = this.querySelector('button[type="submit"]');
     const originalText = submitBtn.textContent;
-    submitBtn.textContent = 'Enviando...';
+    submitBtn.textContent = 'enviando...';
     submitBtn.disabled = true;
     
-    // Envio via EmailJS COM CONFIGURAÇÕES CORRETAS
+    // preparação dos dados para envio
+    const templateParams = {
+        nome: name,
+        email: email,
+        assunto: document.getElementById('subject').options[document.getElementById('subject').selectedIndex].text,
+        mensagem: message,
+        destinatario: EMAILJS_CONFIG.USER_EMAIL,
+        reply_to: email
+    };
+    
+    // primeiro envio: mensagem para o administrador
     emailjs.send(
         EMAILJS_CONFIG.SERVICE_ID, 
         EMAILJS_CONFIG.TEMPLATES.CONTATO, 
-        {
-            nome: name,
-            email: email,
-            assunto: subject,
-            mensagem: message,
-            destinatario: EMAILJS_CONFIG.USER_EMAIL
-        }
+        templateParams
     )
-    .then(() => {
-        mostrarMensagem("Mensagem enviada com sucesso! 💚 Entraremos em contato em breve.", "sucesso");
+    .then((response) => {
+        console.log('email para admin enviado:', response.status, response.text);
+        mostrarMensagem('mensagem enviada com sucesso! 💚 entraremos em contato em breve.', 'sucesso');
         this.reset();
 
-        // Envio da resposta automática
+        // segundo envio: resposta automática para o usuário
+        const autoReplyParams = {
+            nome: name,
+            email: email,
+            assunto: document.getElementById('subject').options[document.getElementById('subject').selectedIndex].text,
+            remetente: EMAILJS_CONFIG.USER_EMAIL
+        };
+        
         return emailjs.send(
             EMAILJS_CONFIG.SERVICE_ID, 
             EMAILJS_CONFIG.TEMPLATES.RESPOSTA_AUTOMATICA, 
-            {
-                nome: name,
-                email: email,
-                assunto: subject,
-                remetente: EMAILJS_CONFIG.USER_EMAIL
-            }
+            autoReplyParams
         );
     })
-    .then(() => {
-        console.log('Email de confirmação enviado com sucesso');
+    .then((response) => {
+        console.log('email de confirmação enviado:', response.status, response.text);
     })
     .catch((error) => {
-        console.error('Erro ao enviar:', error);
-        mostrarMensagem("Ops! Algo deu errado. Tente novamente mais tarde.", "erro");
+        console.error('erro ao enviar email:', error);
+        mostrarMensagem('ops! algo deu errado. tente novamente mais tarde.', 'erro');
     })
     .finally(() => {
-        // Restaurar botão
+        // restaurar estado normal do botão
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;
     });
 });
 
-// Scroll suave para âncoras
+// scroll suave para âncoras internas - melhor experiência de navegação
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        
         const targetId = this.getAttribute('href');
         if (targetId === '#') return;
         
         const targetElement = document.querySelector(targetId);
         if (targetElement) {
+            e.preventDefault();
+            
             window.scrollTo({
                 top: targetElement.offsetTop - 80,
                 behavior: 'smooth'
             });
             
-            // Fechar menu mobile se estiver aberto
-            document.querySelector('.nav-links').classList.remove('active');
+            // fechar menu mobile se estiver aberto
+            const navLinks = document.querySelector('.nav-links');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            if (navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                mobileMenu.textContent = '☰';
+            }
         }
     });
 });
 
-// Animações dos gráficos ao entrar na viewport
+// animações dos gráficos ao entrarem na viewport - intersection observer
 function animateCharts() {
     const chartFills = document.querySelectorAll('.chart-fill');
+    
+    if (!chartFills.length) return;
     
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const fill = entry.target;
-                const width = fill.style.width;
+                const originalWidth = fill.style.width || getComputedStyle(fill).width;
                 fill.style.width = '0';
                 
+                // pequeno delay para trigger da animação
                 setTimeout(() => {
-                    fill.style.width = width;
-                }, 300);
+                    fill.style.transition = 'width 1.2s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                    fill.style.width = originalWidth;
+                }, 100);
                 
                 observer.unobserve(fill);
             }
         });
-    }, { threshold: 0.5 });
+    }, { 
+        threshold: 0.3,
+        rootMargin: '0px 0px -50px 0px'
+    });
     
     chartFills.forEach(fill => {
         observer.observe(fill);
     });
 }
 
-// Contador de estatísticas
+// contadores animados para estatísticas - efeito de contagem
 function animateCounter(element, target, duration = 2000) {
+    const isPercent = element.textContent.includes('%');
+    const currentValue = parseFloat(element.textContent.replace('%', '').replace(',', '.'));
     let start = 0;
     const increment = target / (duration / 16);
+    const startTime = Date.now();
     
     const timer = setInterval(() => {
-        start += increment;
-        if (start >= target) {
-            element.textContent = target + '%';
+        const elapsed = Date.now() - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // easing function para animação mais natural
+        const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+        const current = Math.floor(target * easeOutQuart);
+        
+        element.textContent = isPercent ? current + '%' : current.toFixed(1);
+        
+        if (progress >= 1) {
             clearInterval(timer);
-        } else {
-            element.textContent = Math.floor(start) + '%';
+            element.textContent = isPercent ? target + '%' : target.toFixed(1);
         }
     }, 16);
 }
 
-// Inicializar contadores quando visíveis
+// inicializar contadores quando se tornarem visíveis
 function initCounters() {
     const counters = document.querySelectorAll('.stat-number');
+    
+    if (!counters.length) return;
     
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const element = entry.target;
-                const target = parseFloat(element.textContent.replace('%', '').replace(',', '.'));
+                const text = element.textContent.trim();
                 
-                if (!element.classList.contains('animated')) {
-                    animateCounter(element, target);
+                // extrair valor numérico (remove % e converte vírgula para ponto)
+                const numericValue = parseFloat(text.replace('%', '').replace(',', '.'));
+                
+                if (!isNaN(numericValue) && !element.classList.contains('animated')) {
+                    animateCounter(element, numericValue);
                     element.classList.add('animated');
                 }
                 
                 observer.unobserve(element);
             }
         });
-    }, { threshold: 0.5 });
+    }, { 
+        threshold: 0.5,
+        rootMargin: '0px 0px -100px 0px'
+    });
     
     counters.forEach(counter => {
         observer.observe(counter);
     });
 }
 
-// Efeito de digitação no hero (opcional)
+// efeito de digitação no título hero (opcional)
 function typeWriter(element, text, speed = 50) {
     let i = 0;
     element.innerHTML = '';
@@ -227,135 +273,271 @@ function typeWriter(element, text, speed = 50) {
     type();
 }
 
-// Validação de email no formulário
-function validateEmail(email) {
+// validação de email com regex pattern
+function validarEmail(email) {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
 }
 
+// validação em tempo real do campo email
 document.getElementById('email').addEventListener('blur', function() {
-    const email = this.value;
-    if (email && !validateEmail(email)) {
-        this.style.borderColor = 'red';
+    const email = this.value.trim();
+    if (email && !validarEmail(email)) {
+        this.style.borderColor = '#e74c3c';
+        this.style.boxShadow = '0 0 0 2px rgba(231, 76, 60, 0.1)';
     } else {
         this.style.borderColor = '#ddd';
+        this.style.boxShadow = 'none';
     }
 });
 
-// Fechar menu ao clicar fora (para mobile)
+// fechar menu mobile ao clicar fora dele
 document.addEventListener('click', function(e) {
     const navLinks = document.querySelector('.nav-links');
     const mobileMenu = document.querySelector('.mobile-menu');
     
-    if (navLinks.classList.contains('active') && 
+    if (navLinks && navLinks.classList.contains('active') && 
         !navLinks.contains(e.target) && 
         !mobileMenu.contains(e.target)) {
         navLinks.classList.remove('active');
+        mobileMenu.textContent = '☰';
     }
 });
 
-// Adicionar classe de scroll para header
+// efeito de scroll no header - sombra dinâmica
 window.addEventListener('scroll', function() {
     const header = document.querySelector('header');
-    if (window.scrollY > 100) {
-        header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+    if (window.scrollY > 50) {
+        header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.15)';
+        header.style.backdropFilter = 'blur(10px)';
     } else {
         header.style.boxShadow = 'var(--shadow)';
+        header.style.backdropFilter = 'none';
     }
 });
 
 // ===============================
-// BOTÃO VOLTAR AO TOPO
+// BOTÃO TOGGLE RECURSOS
 // ===============================
-const botaoVoltarTopo = document.getElementById("voltar-topo");
+const btnToggleRecursos = document.getElementById("toggleRecursos");
+const secaoRecursos = document.getElementById("recursos");
+let recursosAberto = false;
 
-if (botaoVoltarTopo) {
-    window.addEventListener("scroll", function() {
-        if (window.scrollY > 300) {
-            botaoVoltarTopo.style.opacity = "1";
-            botaoVoltarTopo.style.pointerEvents = "auto";
+if (btnToggleRecursos && secaoRecursos) {
+    btnToggleRecursos.addEventListener("click", () => {
+        recursosAberto = !recursosAberto;
+        
+        if (recursosAberto) {
+            // mostrar com animação
+            secaoRecursos.style.display = "block";
+            secaoRecursos.classList.add("open");
+            btnToggleRecursos.textContent = "Ocultar Recursos e Apoio";
+            
+            // scroll suave para a seção
+            setTimeout(() => {
+                secaoRecursos.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start'
+                });
+            }, 300);
         } else {
-            botaoVoltarTopo.style.opacity = "0";
-            botaoVoltarTopo.style.pointerEvents = "none";
+            // ocultar com animação
+            secaoRecursos.classList.remove("open");
+            btnToggleRecursos.textContent = "Mostrar Recursos e Apoio";
+            
+            // esperar animação para esconder completamente
+            setTimeout(() => {
+                if (!secaoRecursos.classList.contains("open")) {
+                    secaoRecursos.style.display = "none";
+                }
+            }, 500);
         }
-    });
-
-    botaoVoltarTopo.addEventListener("click", function() {
-        window.scrollTo({ top: 0, behavior: "smooth" });
     });
 }
 
 // ===============================
 // FUNÇÕES DE APOIO
 // ===============================
-function validarEmail(email) {
-    const padrao = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return padrao.test(email);
-}
-
 function mostrarMensagem(texto, tipo) {
-    // Criar elemento de mensagem se não existir
-    let mensagemFormulario = document.getElementById('mensagemFormulario');
-    if (!mensagemFormulario) {
-        mensagemFormulario = document.createElement('div');
-        mensagemFormulario.id = 'mensagemFormulario';
-        mensagemFormulario.style.cssText = 'position: fixed; top: 20px; right: 20px; padding: 15px 20px; border-radius: 5px; z-index: 10000; font-weight: 600; display: none;';
-        document.body.appendChild(mensagemFormulario);
+    // criar ou reutilizar elemento de mensagem
+    let mensagemElemento = document.getElementById('mensagemFormulario');
+    
+    if (!mensagemElemento) {
+        mensagemElemento = document.createElement('div');
+        mensagemElemento.id = 'mensagemFormulario';
+        mensagemElemento.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 8px;
+            z-index: 10000;
+            font-weight: 600;
+            display: none;
+            max-width: 350px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        `;
+        document.body.appendChild(mensagemElemento);
     }
     
-    mensagemFormulario.style.display = "block";
-    mensagemFormulario.textContent = texto;
-    mensagemFormulario.className = "";
-
+    // configurar estilo baseado no tipo
+    mensagemElemento.textContent = texto;
+    mensagemElemento.style.display = "block";
+    
     if (tipo === "sucesso") {
-        mensagemFormulario.classList.add("mensagem-sucesso");
-        mensagemFormulario.style.backgroundColor = '#d4edda';
-        mensagemFormulario.style.color = '#155724';
-        mensagemFormulario.style.border = '1px solid #c3e6cb';
+        mensagemElemento.style.backgroundColor = 'rgba(46, 204, 113, 0.95)';
+        mensagemElemento.style.color = '#fff';
+        mensagemElemento.style.border = '2px solid #27ae60';
     } else {
-        mensagemFormulario.classList.add("mensagem-erro");
-        mensagemFormulario.style.backgroundColor = '#f8d7da';
-        mensagemFormulario.style.color = '#721c24';
-        mensagemFormulario.style.border = '1px solid #f5c6cb';
+        mensagemElemento.style.backgroundColor = 'rgba(231, 76, 60, 0.95)';
+        mensagemElemento.style.color = '#fff';
+        mensagemElemento.style.border = '2px solid #c0392b';
     }
-
-    mensagemFormulario.style.animation = "fadeIn 0.5s ease-in";
-
+    
+    // animação de entrada
+    mensagemElemento.style.animation = "fadeInSlide 0.5s ease forwards";
+    
+    // auto-remover após 4 segundos
     setTimeout(() => {
-        mensagemFormulario.style.animation = "fadeOut 0.5s ease-out";
+        mensagemElemento.style.animation = "fadeOutSlide 0.5s ease forwards";
         setTimeout(() => {
-            mensagemFormulario.style.display = "none";
+            mensagemElemento.style.display = "none";
         }, 500);
     }, 4000);
 }
 
 // ===============================
-// CSS INJETADO VIA JS
+// CSS INJETADO DINAMICAMENTE
 // ===============================
-const estiloMensagens = document.createElement("style");
-estiloMensagens.textContent = `
-    .mensagem-sucesso { color: #2a9d8f; font-weight: 600; }
-    .mensagem-erro { color: #e63946; font-weight: 600; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes fadeOut { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-10px); } }
+const estiloDinamico = document.createElement("style");
+estiloDinamico.textContent = `
+    @keyframes fadeInSlide { 
+        from { 
+            opacity: 0; 
+            transform: translateX(100px) translateY(0); 
+        } 
+        to { 
+            opacity: 1; 
+            transform: translateX(0) translateY(0); 
+        } 
+    }
+    
+    @keyframes fadeOutSlide { 
+        from { 
+            opacity: 1; 
+            transform: translateX(0) translateY(0); 
+        } 
+        to { 
+            opacity: 0; 
+            transform: translateX(100px) translateY(0); 
+        } 
+    }
+    
+    .chart-fill {
+        transition: width 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    
+    /* animação para cards ao entrar na viewport */
+    .card, .stat-card, .tip-card {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    
+    .card.visible, .stat-card.visible, .tip-card.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
 `;
-document.head.appendChild(estiloMensagens);
+document.head.appendChild(estiloDinamico);
 
-// Inicializar quando a página carregar
+// observador para animar cards quando entrarem na viewport
+function initCardAnimations() {
+    const cards = document.querySelectorAll('.card, .stat-card, .tip-card');
+    
+    if (!cards.length) return;
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    cards.forEach(card => {
+        observer.observe(card);
+    });
+}
+
+// ===============================
+// INICIALIZAÇÃO GERAL
+// ===============================
 document.addEventListener('DOMContentLoaded', function() {
+    // inicializar todas as animações
     animateCharts();
     initCounters();
+    initCardAnimations();
     
-    // Adicionar classe active ao primeiro item de cada seção
+    // garantir que a primeira tab esteja ativa
     const firstTabContent = document.querySelector('.tab-content');
-    if (firstTabContent) {
+    if (firstTabContent && !firstTabContent.classList.contains('active')) {
+        document.querySelector('.tab-btn').classList.add('active');
         firstTabContent.classList.add('active');
     }
     
-    // Ativar efeito de digitação se necessário
+    // efeito de digitação no hero (opcional)
     const heroTitle = document.querySelector('.hero h2');
-    if (heroTitle) {
+    if (heroTitle && !sessionStorage.getItem('heroAnimated')) {
         const originalText = heroTitle.textContent;
-        typeWriter(heroTitle, originalText);
+        heroTitle.textContent = '';
+        setTimeout(() => {
+            typeWriter(heroTitle, originalText);
+        }, 500);
+        sessionStorage.setItem('heroAnimated', 'true');
     }
+    
+    // configurar filtro de cidade para mostrar todas inicialmente
+    const cityFilter = document.getElementById('cityFilter');
+    if (cityFilter) {
+        cityFilter.value = 'all';
+        cityFilter.dispatchEvent(new Event('change'));
+    }
+    
+    // previnir envio de formulário com enter em campos não-submit
+    document.querySelectorAll('.form-control').forEach(input => {
+        input.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && this.tagName !== 'TEXTAREA') {
+                e.preventDefault();
+            }
+        });
+    });
 });
+
+// debounce para eventos de scroll/resize
+function debounce(func, wait = 100) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// re-inicializar animações ao redimensionar
+window.addEventListener('resize', debounce(() => {
+    animateCharts();
+    initCounters();
+}));
+
+// suporte para navegadores mais antigos
+if (!Element.prototype.scrollIntoView) {
+    Element.prototype.scrollIntoView = function() {
+        window.scrollTo(0, this.offsetTop - 80);
+    };
+}
