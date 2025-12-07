@@ -168,7 +168,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// animações dos gráficos ao entrarem na viewport - intersection observer
+// ===============================
+// ANIMAÇÃO DOS GRÁFICOS - CORRIGIDA
+// ===============================
 function animateCharts() {
     const chartFills = document.querySelectorAll('.chart-fill');
     
@@ -178,14 +180,22 @@ function animateCharts() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const fill = entry.target;
-                const originalWidth = fill.style.width || getComputedStyle(fill).width;
-                fill.style.width = '0';
                 
-                // pequeno delay para trigger da animação
+                // SALVAR a largura original ANTES de mudar para 0
+                const originalWidth = fill.style.width || fill.getAttribute('data-width') || '0%';
+                
+                // Reset para animação
+                fill.style.width = '0';
+                fill.style.transition = 'none'; // Remove transição inicial
+                
+                // Pequeno delay para trigger da animação
                 setTimeout(() => {
                     fill.style.transition = 'width 1.2s cubic-bezier(0.34, 1.56, 0.64, 1)';
                     fill.style.width = originalWidth;
-                }, 100);
+                    
+                    // Adicionar classe para evitar reanimação
+                    fill.classList.add('animated');
+                }, 50);
                 
                 observer.unobserve(fill);
             }
@@ -196,7 +206,37 @@ function animateCharts() {
     });
     
     chartFills.forEach(fill => {
+        // Adicionar data-width se não existir (como fallback)
+        if (!fill.getAttribute('data-width') && fill.style.width) {
+            fill.setAttribute('data-width', fill.style.width);
+        }
         observer.observe(fill);
+    });
+}
+
+// ===============================
+// SOLUÇÃO ALTERNATIVA PARA GRÁFICOS
+// ===============================
+function forceChartAnimation() {
+    const chartFills = document.querySelectorAll('.chart-fill:not(.animated)');
+    
+    chartFills.forEach(fill => {
+        // Salvar largura atual
+        const currentWidth = fill.style.width;
+        
+        // Animar de 0 para a largura atual
+        fill.style.width = '0';
+        fill.style.transition = 'none';
+        
+        // Trigger reflow
+        fill.offsetHeight;
+        
+        // Aplicar animação
+        setTimeout(() => {
+            fill.style.transition = 'width 1.2s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            fill.style.width = currentWidth;
+            fill.classList.add('animated');
+        }, 50);
     });
 }
 
@@ -476,19 +516,22 @@ function initCardAnimations() {
 // INICIALIZAÇÃO GERAL
 // ===============================
 document.addEventListener('DOMContentLoaded', function() {
-    // inicializar todas as animações
-    animateCharts();
+    // Inicializar todas as animações
     initCounters();
     initCardAnimations();
+    animateCharts(); // Chamar aqui também
     
-    // garantir que a primeira tab esteja ativa
+    // Garantir que a primeira tab esteja ativa
     const firstTabContent = document.querySelector('.tab-content');
     if (firstTabContent && !firstTabContent.classList.contains('active')) {
-        document.querySelector('.tab-btn').classList.add('active');
-        firstTabContent.classList.add('active');
+        const firstTabBtn = document.querySelector('.tab-btn');
+        if (firstTabBtn) {
+            firstTabBtn.classList.add('active');
+            firstTabContent.classList.add('active');
+        }
     }
     
-    // efeito de digitação no hero (opcional)
+    // Efeito de digitação no hero (opcional)
     const heroTitle = document.querySelector('.hero h2');
     if (heroTitle && !sessionStorage.getItem('heroAnimated')) {
         const originalText = heroTitle.textContent;
@@ -499,19 +542,52 @@ document.addEventListener('DOMContentLoaded', function() {
         sessionStorage.setItem('heroAnimated', 'true');
     }
     
-    // configurar filtro de cidade para mostrar todas inicialmente
+    // Configurar filtro de cidade para mostrar todas inicialmente
     const cityFilter = document.getElementById('cityFilter');
     if (cityFilter) {
         cityFilter.value = 'all';
         cityFilter.dispatchEvent(new Event('change'));
     }
     
-    // previnir envio de formulário com enter em campos não-submit
+    // Previnir envio de formulário com enter em campos não-submit
     document.querySelectorAll('.form-control').forEach(input => {
         input.addEventListener('keydown', function(e) {
             if (e.key === 'Enter' && this.tagName !== 'TEXTAREA') {
                 e.preventDefault();
             }
+        });
+    });
+    
+    // Forçar animação dos gráficos após um pequeno delay (para garantir que o DOM esteja pronto)
+    setTimeout(() => {
+        const chartFills = document.querySelectorAll('.chart-fill');
+        chartFills.forEach(fill => {
+            // Verificar se já está visível na viewport
+            const rect = fill.getBoundingClientRect();
+            const isVisible = (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+            
+            if (isVisible && !fill.classList.contains('animated')) {
+                const originalWidth = fill.style.width || fill.getAttribute('data-width') || '0%';
+                fill.style.width = '0';
+                
+                setTimeout(() => {
+                    fill.style.transition = 'width 1.2s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                    fill.style.width = originalWidth;
+                    fill.classList.add('animated');
+                }, 100);
+            }
+        });
+    }, 300);
+    
+    // Adicionar event listener para as tabs para reanimar gráficos
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            setTimeout(forceChartAnimation, 300);
         });
     });
 });
@@ -531,9 +607,26 @@ function debounce(func, wait = 100) {
 
 // re-inicializar animações ao redimensionar
 window.addEventListener('resize', debounce(() => {
-    animateCharts();
+    // Forçar reanimação dos gráficos que ainda não foram animados
+    const chartFills = document.querySelectorAll('.chart-fill:not(.animated)');
+    chartFills.forEach(fill => {
+        const originalWidth = fill.style.width || fill.getAttribute('data-width') || '0%';
+        fill.style.width = '0';
+        
+        setTimeout(() => {
+            fill.style.transition = 'width 1.2s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            fill.style.width = originalWidth;
+            fill.classList.add('animated');
+        }, 100);
+    });
+    
     initCounters();
 }));
+
+// Chamar após carregamento completo
+window.addEventListener('load', function() {
+    setTimeout(forceChartAnimation, 500);
+});
 
 // suporte para navegadores mais antigos
 if (!Element.prototype.scrollIntoView) {
