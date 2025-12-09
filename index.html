@@ -62,10 +62,6 @@
                     <p>Nossa missão é fornecer informações baseadas em evidências científicas, promover a prevenção e oferecer suporte a indivíduos e famílias afetadas pela dependência química.</p>
                     <p>Acreditamos que a educação é a ferramenta mais poderosa para prevenir o uso de drogas e promover escolhas saudáveis. Por meio de conteúdos educativos e campanhas de conscientização, buscamos construir uma sociedade mais informada e resiliente.</p>
                 </div>
-                <div class="about-image">
-                    <!-- imagem do unsplash via cdn - boa qualidade mas externa -->
-                    <img src="https://images.unsplash.com/photo-1576671414121-aa0f7cfb7b98?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Equipe do Conscientiza">
-                </div>
             </div>
         </div>
     </section>
@@ -78,13 +74,13 @@
             <!-- grid de estatísticas - layout responsivo com css grid -->
             <div class="stats-grid">
                 <div class="stat-card">
-                    <div class="stat-number">30,1</div>
+                    <div class="stat-number">30,1%</div>
                     <div class="stat-text">dos Brasileiros entrevistados relataram ter consumido alcool nos útimos 30 dias.</div>
                     <div class="stat-source">Fonte: FIOCRUZ, III Levantamento Nacional sobre o uso de Drogas pela população Brasileira, 2017</div>
                 </div>
 
                 <div class="stat-card">
-                    <div class="stat-number">34,3</div>
+                    <div class="stat-number">34,3%</div>
                     <div class="stat-text">dos Brasileiros menores de idade já consumiram álcool.</div>
                     <div class="stat-source">Fonte: FIOCRUZ, III Levantamento Nacional sobre o uso de Drogas pela população Brasileira, 2017</div>
                 </div>
@@ -112,6 +108,15 @@
                             <!-- width definida inline - poderia usar data-attributes e js -->
                             <div class="chart-fill" style="width: 66.4%"></div>
                         </div>
+
+                                                <div class="chart-label">
+                            <span>Tabaco (uso atual)</span>
+                            <span>20%</span>
+                        </div>
+                        <div class="chart-bar">
+                            <div class="chart-fill" style="width: 20%"></div>
+                        </div>
+                    </div>
                         
                         <div class="chart-label">
                             <span>Maconha (uso na vida)</span>
@@ -129,14 +134,6 @@
                             <div class="chart-fill" style="width: 3.1%"></div>
                         </div>
                         
-                        <div class="chart-label">
-                            <span>Tabaco (uso atual)</span>
-                            <span>9,8%</span>
-                        </div>
-                        <div class="chart-bar">
-                            <div class="chart-fill" style="width: 9.8%"></div>
-                        </div>
-                    </div>
                     <p class="chart-source">Fonte: FIOCRUZ, 3º Levantamento Nacional sobre Drogas, 2019</p>
                 </div>
                 
@@ -148,7 +145,7 @@
                             <span>80%</span>
                         </div>
                         <div class="chart-bar">
-                            <!-- classe específica para gráfico de crack -->
+                            <!-- classe específica para o gráfico dos usuarios de crack -->
                             <div class="chart-fill crack-bar" style="width: 78.7%"></div>
                         </div>
                         
@@ -176,14 +173,14 @@
                             <div class="chart-fill crack-bar" style="width: 28%"></div>
                         </div>
                     </div>
-                    <p class="chart-source">Fonte: Programa de assistência social "De Braços Abertos". FIOCRUZ, Pesquisa Nacional sobre o Uso de Crack, 2014</p>
+                    <p class="chart-source">Fonte: Fundação Oswaldo Cruz (Fiocruz) em parceria com a Secretaria Nacional de Políticas Sobre Drogas (SENAD)</p>
                 </div>
             </div>
             <br><br>
 
             <!-- sistema de tabs/abas - conteúdo dinâmico sem recarregar página -->
             <div class="info-tabs">
-                <!-- botões das tabs com data-attributes para controle via js -->
+                <!-- botões das tabs com data-attributes para controle pelo javascript -->
                 <div class="tab-buttons">
                     <button class="tab-btn active" data-tab="tipos">Tipos de Drogas</button>
                     <button class="tab-btn" data-tab="efeitos">Efeitos</button>
@@ -328,7 +325,7 @@
                                     <li>Estabelecer comunicação aberta e honesta sobre drogas;</li>
                                     <li>Estabelecer regras e limites claros;</li>
                                     <li>Participar ativamente da vida dos filhos;</li>
-                                    <li>Ser um modelo positivo de comportamento.</li>
+                                    <li>Ser um modelo positivo de comportamento.</li>                                 <span class="stat-source">Fonte: mpdft, 2025</span>
                                 </ul>
                             </div>
                         </div>
@@ -340,7 +337,7 @@
                                     <li>Implementar programas de prevenção baseados em evidências;</li>
                                     <li>Promover habilidades socioemocionais;</li>
                                     <li>Criar ambiente escolar seguro e acolhedor;</li>
-                                    <li>Capacitar educadores para identificação precoce.</li>
+                                    <li>Capacitar educadores para identificação precoce.</li>                                 <span class="stat-source">Fonte: UNIAD, 2013</span>
                                 </ul>
                             </div>
                         </div>
@@ -383,118 +380,106 @@
                     <option value="all">Todas as cidades</option>
                     <option value="sao-paulo">São Paulo</option>
                     <option value="rio-de-janeiro">Rio de Janeiro</option>
-                    <option value="belo-horizonte">Belo Horizonte</option>
                     <option value="brasilia">Brasília</option>
                     <option value="salvador">Salvador</option>
                 </select>
             </div>
             
-            <!-- grid de cards de recursos - filtrados por data-city attribute -->
+            <!-- grid de cards de recursos - filtrados por data-city -->
             <div class="cards-container" id="caps">
-                <!-- card de são paulo com data-city attribute -->
-                <div class="card resource-card" data-city="sao-paulo">
-                    <div class="resource-icon">🏥</div>
-                    <div class="resource-info">
-                        <h3>CAPS AD III Centro</h3>
-                        <p>Rua Frederico Alvarenga, 259 – Parque D. Pedro II / Bela Vista</p>
-                        <p>São Paulo - SP</p>
-                        <p>Telefone: (11) 3241‑5460</p>
-                        <p class="service-info">Atendimento multiprofissional</p>
-                    </div>
-                </div>
+                <!-- card de são paulo com data-city -->
+              <!-- são paulo -->
+<div class="card resource-card" data-city="sao-paulo">
+  <div class="resource-icon">🏥</div>
+  <div class="resource-info">
+    <h3>CAPS AD III Centro</h3>
+    <p>Rua Frederico Alvarenga, 259 – Parque Dom Pedro II</p>
+    <p>São Paulo - SP, CEP: 01020-030</p>
+    <p>Telefone: (11) 3241-5460 / (11) 3241-0901</p>
+    <p class="service-info">Atendimento multiprofissional</p>
+  </div>
+</div>
 
-                <div class="card resource-card" data-city="sao-paulo">
-                    <div class="resource-icon">🏥</div>
-                    <div class="resource-info">
-                        <h3>CAPS AD II Cachoeirinha</h3>
-                        <p>Rua Desembargador Rodrigues Sette, 111 – Cachoeirinha</p>
-                        <p>São Paulo - SP</p>
-                        <p>Telefone: (11) 2232‑4770</p>
-                        <p class="service-info">Atendimento diurno</p>
-                    </div>
-                </div>
+<div class="card resource-card" data-city="sao-paulo">
+  <div class="resource-icon">🏥</div>
+  <div class="resource-info">
+    <h3>CAPS AD II Cachoeirinha</h3>
+    <p>Rua Desembargador Rodrigues Sette, 111 – Jardim Peri (Cachoeirinha)</p>
+    <p>São Paulo - SP, CEP: 02634-070</p>
+    <p>Telefone: (11) 2232-4770</p>
+    <p class="service-info">Atendimento diurno</p>
+  </div>
+</div>
 
-                <div class="card resource-card" data-city="sao-paulo">
-                    <div class="resource-icon">🏥</div>
-                    <div class="resource-info">
-                        <h3>CAPS AD II Vila Mariana</h3>
-                        <p>Av. Ceci, 2101 – Planalto Paulista / Vila Mariana</p>
-                        <p>São Paulo - SP</p>
-                        <p>Telefone: (11) 2275‑3432</p>
-                        <p class="service-info">Atendimento diurno</p>
-                    </div>
-                </div>
+<div class="card resource-card" data-city="sao-paulo">
+  <div class="resource-icon">🏥</div>
+  <div class="resource-info">
+    <h3>CAPS AD II Vila Mariana</h3>
+    <p>Avenida Ceci, 2101 – Planalto Paulista / Vila Mariana</p>
+    <p>São Paulo - SP, CEP: 04065-004</p>
+    <p>Telefone: (11) 2275-3432</p>
+    <p class="service-info">Atendimento diurno</p>
+  </div>
+</div>
 
-                <div class="card resource-card" data-city="sao-paulo">
-                    <div class="resource-icon">🏥</div>
-                    <div class="resource-info">
-                        <h3>CAPS AD II São Mateus</h3>
-                        <p>Rua Joaquim Gouveia Franco, 150 – São Mateus</p>
-                        <p>São Paulo - SP</p>
-                        <p>Telefone: (11) 5237-8026</p>
-                        <p class="service-info">Atendimento multiprofissional</p>
-                    </div>
-                </div>
+<div class="card resource-card" data-city="sao-paulo">
+  <div class="resource-icon">🏥</div>
+  <div class="resource-info">
+    <h3>CAPS AD III São Mateus</h3>
+    <p>Rua Joaquim Gouveia Franco, 150 – Cidade São Mateus</p>
+    <p>São Paulo - SP, CEP: 03961-020</p>
+    <p>Telefone: (11) 2019-8143 / (11) 2010-8146</p>
+    <p class="service-info">Atendimento multiprofissional</p>
+  </div>
+</div>
 
-                <!-- rio de janeiro -->
-                <div class="card resource-card" data-city="rio-de-janeiro">
-                    <div class="resource-icon">🏥</div>
-                    <div class="resource-info">
-                        <h3>CAPS III Fernando Diniz</h3>
-                        <p>Rua Leopoldina Rego, 754 – Penha</p>
-                        <p>Rio de Janeiro - RJ</p>
-                        <p>Telefone: (21) 3959-2723</p>
-                        <p class="service-info">Atendimento multiprofissional</p>
-                    </div>
-                </div>
+<div class="card resource-card" data-city="sao-paulo">
+  <div class="resource-icon">🏥</div>
+  <div class="resource-info">
+    <h3>CAPS AD – Brasilândia</h3>
+    <p>Rua Olinto Fraga Moreira, 275 – Brasilândia</p>
+    <p>São Paulo - SP, CEP: 02845-050</p>
+    <p>Telefone: (11) 3923-6947</p>
+    <p class="service-info">Atendimento multiprofissional</p>
+  </div>
+</div>
 
-                <!-- belo horizonte -->
-                <div class="card resource-card" data-city="belo-horizonte">
-                    <div class="resource-icon">🏥</div>
-                    <div class="resource-info">
-                        <h3>CAPS AD Leste</h3>
-                        <p>Rua do Ouro, 1058 – Serra</p>
-                        <p>Belo Horizonte - MG</p>
-                        <p class="service-info">Atendimento multiprofissional</p>
-                    </div>
-                </div>
+<!-- salvador -->
+<div class="card resource-card" data-city="salvador">
+  <div class="resource-icon">🏥</div>
+  <div class="resource-info">
+    <h3>CAPS AD Gregório de Matos</h3>
+    <p>Rua Saldanha, 35 – Pelourinho (Centro Histórico)</p>
+    <p>Salvador - BA, CEP: 40020-250</p>
+    <p>Telefone: (71) 3322-0235 / (71) 3322-0304</p>
+    <p class="service-info">Atendimento psicossocial / AD</p>
+  </div>
+</div>
 
-                <!-- são paulo -->
-                <div class="card resource-card" data-city="sao-paulo">
-                    <div class="resource-icon">🏥</div>
-                    <div class="resource-info">
-                        <h3>CAPS III - Álcool e Drogas Brasilandia</h3>
-                        <p>Rua Olinto Fraga Moreira, 275 – Brasilandia</p>
-                        <p>São Paulo - SP</p>
-                        <p>Telefone: (11) 5237-5425</p>
-                        <p class="service-info">Atendimento multiprofissional</p>
-                    </div>
-                </div>
+<!-- rio de janeiro -->
+<div class="card resource-card" data-city="rio-de-janeiro">
+  <div class="resource-icon">🏥</div>
+  <div class="resource-info">
+    <h3>CAPS III Fernando Diniz</h3>
+    <p>Rua Leopoldina Rego, 754 – Olaria</p>
+    <p>Rio de Janeiro - RJ, CEP: 21021-522</p>
+    <p>Telefone: (21) 3867-1319</p>
+    <p class="service-info">Atendimento psicossocial / saúde mental</p>
+  </div>
+</div>
 
-                <!-- salvador -->
-                <div class="card resource-card" data-city="salvador">
-                    <div class="resource-icon">🏥</div>
-                    <div class="resource-info">
-                        <h3>CAPS AD Gregório de Matos</h3>
-                        <p>Largo do Paranhos, 28 – Brotas</p>
-                        <p>Salvador - BA</p>
-                        <p>Telefone: (71) 3176‑5600</p>
-                        <p class="service-info">Atendimento multiprofissional</p>
-                    </div>
-                </div>
+<!-- brasília -->
+<div class="card resource-card" data-city="brasilia">
+  <div class="resource-icon">🏥</div>
+  <div class="resource-info">
+    <h3>CAPS II Brasília (Asa Norte)</h3>
+    <p>SGAN 905, Módulo D – Asa Norte</p>
+    <p>Brasília - DF, CEP: 70790-054</p>
+    <p>Telefone: (61) 9200-1779 / (61) 9200-1782</p>
+    <p class="service-info">Atendimento psicossocial / CAPS II</p>
+  </div>
+</div>
 
-                <!-- brasília -->
-                <div class="card resource-card" data-city="brasilia">
-                    <div class="resource-icon">🏥</div>
-                    <div class="resource-info">
-                        <h3>CAPS AD III Brasília (Candango)</h3>
-                        <p>SCS, Quadra 05, Bloco B, Loja 73 – Asa Sul</p>
-                        <p>Brasília - DF</p>
-                        <p>Telefone: (61) 2017‑1145 (ramal 1169)</p>
-                        <p class="service-info">Atendimento 24h / acolhimento contínuo</p>
-                    </div>
-                </div>
-            </div>
 
             <!-- informações sobre como encontrar mais caps -->
             <div class="caps-info">
